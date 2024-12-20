@@ -9,3 +9,32 @@
 *:before, *:after {
     box-sizing: border-box;
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+}
+.header {
+    background-color: #1f293788;
+    color: #fff;
+}
+.header .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+}
+.header .logo {
+    font-family: "Expletus Sans", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.navigation ul {
+    display: flex;
+    column-gap: 25px;
+    list-style: none;
+}
