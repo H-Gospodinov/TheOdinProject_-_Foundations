@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans:wght@600&display=swap" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet" type="text/css">
-    <link href="animation.css" rel="stylesheet" type="text/css">
+    <link href="styles.css" rel="stylesheet">
+    <link href="animation.css" rel="stylesheet">
 </head>
 <body>
     <div class="page-container">
@@ -20,7 +20,8 @@
                     <a href="#">Astronomy Books</a>
                 </div>
                 <nav class="navigation">
-                    <ul>
+                    <button class="menu-button" id="menuButton"><span>Menu button</span></button>
+                    <ul class="menu" id="headerMenu">
                         <li><a href="#">Shop by Category</a></li>
                         <li><a href="#">Shop by Publisher</a></li>
                         <li><a href="#">Shop by Author</a></li>
@@ -40,5 +41,12 @@
         <div id='stars2'></div>
         <div id='stars3'></div>
     </div>
+    <script>
+        const menuButton = document.querySelector('#menuButton');
+        const mobileNav = document.querySelector('#headerMenu').parentElement;
+        menuButton.onclick = function() {
+            mobileNav.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
