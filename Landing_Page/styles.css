@@ -90,13 +90,20 @@ body {
         margin-top: 20px;
         border-radius: 3px;
         background-color: #fff;
-        padding: 10px 12px;
+        padding: 6px 0;
         opacity: 0;
     }
     .navigation.active .menu {
         pointer-events: auto;
         transition: opacity 0.3s ease;
         opacity: 1;
+    }
+    .navigation .menu-item {
+        padding: 3px 12px;
+    }
+    .navigation .menu-item +li {
+        border-top: 1px solid #ddd;
+        padding-top: 6px;
     }
     .active .menu-button {
         row-gap: 0;
@@ -128,7 +135,7 @@ body {
     .navigation .menu a:hover {
         text-shadow: 1px 1px #ffffff55,-1px -1px #ffffff55;
     }
-    .navigation .menu li + li::before {
+    .navigation .menu-item +li::before {
         content: "";
         position: absolute;
         width: 0;
