@@ -18,6 +18,11 @@ p {
 p + p {
     margin-top: 20px;
 }
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
 a {
     text-decoration: none;
     color: inherit;
@@ -90,6 +95,51 @@ body {
 }
 .page-content {
     flex-grow: 1;
+}
+.products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 30px;
+    margin: 35px;
+}
+.item-box {
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #ffffffcc;
+}
+.item-box .image {
+    display: flex;
+    border: 5px solid #fff;
+}
+.item-box .details {
+    display: flex;
+    flex-flow: column;
+    row-gap: 20px;
+    padding: 20px;
+}
+.item-box .title {
+    font-family: "Expletus Sans", sans-serif;
+    font-size: 20px;
+}
+.item-box .description {
+    margin-top: -5px;
+}
+.item-box .action {
+    border: none;
+    border-radius: 5px;
+    outline: 1px solid transparent;
+    background-color: #1f2937;
+    padding: 10px 15px;
+    font-family: "Expletus Sans", sans-serif;
+    text-transform: uppercase;
+    color: #ffffff;
+    white-space: nowrap;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.item-box .action:hover {
+    outline-color: #2f3947;
+    background-color: #2f3947;
 }
 .footer {
     display: flex;
