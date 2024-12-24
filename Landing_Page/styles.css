@@ -15,9 +15,6 @@ ul {
 p {
     line-height: 22px;
 }
-p + p {
-    margin-top: 20px;
-}
 img {
     width: auto;
     max-width: 100%;
@@ -95,6 +92,44 @@ body {
 }
 .page-content {
     flex-grow: 1;
+    padding-bottom: 5%;
+}
+.upper-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2% 0;
+    padding: 25px;
+    color: #fff;
+}
+.introduction {
+    display: flex;
+    flex-flow: column;
+    row-gap: 20px;
+}
+.introduction h1 {
+    display: flex;
+    align-items: center;
+    font-family: "Expletus Sans", sans-serif;
+    font-size: 50px;
+}
+.introduction h1 strong {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin: 0 10px;
+    padding: 20px;
+}
+.introduction .action {
+    align-self: flex-start;
+    border-radius: 5px;
+    background: #0cb;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+    text-shadow: 1px 1px #ffffff33;
+}
+.decoration {
+    max-width: 60%;
 }
 .books-section {
     display: grid;
