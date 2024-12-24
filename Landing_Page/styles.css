@@ -93,13 +93,12 @@ body {
 }
 .page-content {
     flex-grow: 1;
-    padding-bottom: 5%;
+    padding: 2% 0 5%;
 }
 .upper-section {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 2% 0;
     padding: 25px;
     color: #fff;
 }
@@ -136,7 +135,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
-    margin: 25px;
+    padding: 25px;
 }
 .item-box {
     display: flex;
@@ -327,9 +326,12 @@ body {
 }
 @media (min-width: 1501px) {
 
+    .upper-section {
+        padding: 35px;
+    }
     .lower-section {
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 30px;
-        margin: 35px;
+        padding: 35px;
     }
 }
