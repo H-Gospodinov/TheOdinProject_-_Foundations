@@ -132,7 +132,7 @@ body {
 .decoration {
     max-width: 60%;
 }
-.books-section {
+.lower-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -264,7 +264,7 @@ body {
 }
 @media (min-width: 601px) {
 
-    .books-section {
+    .lower-section {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 20px;
     }
@@ -320,14 +320,14 @@ body {
 }
 @media (min-width: 1025px) {
 
-    .books-section {
+    .lower-section {
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 25px;
     }
 }
 @media (min-width: 1501px) {
 
-    .books-section {
+    .lower-section {
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 30px;
         margin: 35px;
