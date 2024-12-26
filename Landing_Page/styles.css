@@ -36,6 +36,7 @@ body {
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 15px;
 }
+
 .page-container {
     display: flex;
     flex-flow: column;
@@ -43,6 +44,7 @@ body {
     min-height: 100%;
     margin: auto;
 }
+
 .header {
     display: flex;
     align-items: center;
@@ -114,10 +116,12 @@ body {
 .navigation .menu a {
     white-space: nowrap;
 }
+
 .page-content {
     flex-grow: 1;
     padding: 2% 0 5%;
 }
+
 .upper-section {
     display: flex;
     align-items: center;
@@ -215,6 +219,7 @@ body {
 .system__orbit--sun {
     max-height: 50px;
 }
+
 .lower-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -279,6 +284,7 @@ body {
     outline-color: #2f3947;
     background-color: #2f3947;
 }
+
 .footer {
     display: flex;
     align-items: center;
@@ -294,6 +300,7 @@ body {
 .footer a:hover {
     text-decoration: underline;
 }
+
 
 @media (max-width: 600px) {
 
