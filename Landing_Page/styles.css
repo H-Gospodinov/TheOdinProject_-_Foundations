@@ -52,6 +52,8 @@ body {
 }
 .header .logo {
     display: flex;
+    align-items: center;
+    column-gap: 9px;
     transform: translateY(-2px);
     font-family: "Expletus Sans", sans-serif;
     font-size: 30px;
@@ -59,12 +61,31 @@ body {
     letter-spacing: 1px;
     color: #fff;
 }
+.header .logo img {
+    width: 36px;
+    margin-right: 3px;
+    filter: invert(1);
+    transition: 0.3s ease;
+}
 .header .logo a {
+    white-space: nowrap;
     transition: 0.3s ease;
 }
 .header .logo a:hover {
     text-shadow: 1px 1px #ffffff29, -1px -1px #ffffff29,
                  2px 2px #ffffff29, -2px -2px #ffffff29;
+}
+.header .name {
+    display: inline-block;
+}
+.header .name:first-letter {
+    color: #0cb;
+}
+.header .demo {
+    margin-top: 8px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    font-weight: normal;
 }
 .menu-button {
     display: flex;
@@ -118,11 +139,25 @@ body {
     white-space: nowrap;
     transition: 0.2s ease;
 }
-.introduction h1 strong {
-    border: 2px solid #fff;
-    border-radius: 50%;
+.introduction .circle {
+    position: relative;
     margin: 0 10px;
-    padding: 20px;
+    border: 3px solid #0cb;
+    border-radius: 50%;
+    padding: 15px;
+    color: #0cb;
+}
+.introduction .circle::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    bottom: -10px;
+    left: 10px;
+    border-top: 7px solid #0cb;
+    border-bottom: 7px solid #0cb;
+    border-radius: 50%;
+    transform: rotate(45deg);
 }
 .introduction .about {
     max-width: 850px;
@@ -132,6 +167,10 @@ body {
     hyphens: auto;
 }
 .introduction .about a {
+    text-decoration: underline;
+    color: #0cb;
+}
+.introduction .about a:hover {
     text-decoration: underline;
 }
 .introduction .action {
@@ -234,6 +273,13 @@ body {
 
 @media (max-width: 600px) {
 
+    .header .logo img {
+        width: 24px !important;
+        margin-right: 0;
+    }
+    .header .logo a {
+        font-size: 24px;
+    }
     .introduction h1 {
         font-size: 35px;
     }
@@ -255,8 +301,10 @@ body {
         flex-flow: column;
         row-gap: 6px;
         position: absolute;
-        right: -5px; /**/
-        margin-top: 20px;
+        right: -5px;
+        z-index: 1;
+        min-width: 155px;
+        margin-top: 25px;
         border-radius: 3px;
         background-color: #fff;
         padding: 6px 0;
@@ -297,6 +345,9 @@ body {
 }
 @media (max-width: 1024px) {
 
+    .header .logo img {
+        width: 30px;
+    }
     .upper-section {
         flex-flow: column;
         row-gap: 45px;
@@ -304,16 +355,13 @@ body {
     .introduction {
         align-items: center;
     }
-    .introduction h1 span {
-        display: none;
-    }
 }
 @media (max-width: 1200px) {
 
-    .header .logo span {
+    .header .logo .hide {
         display: none;
     }
-    .introduction h1 span {
+    .introduction h1 .hide {
         display: none;
     }
 }
@@ -369,9 +417,9 @@ body {
         border: solid transparent;
         border-width: 0 10px 1px 10px;
         border-bottom-color: #fff;
-        animation: rotate360 5s linear infinite;
+        animation: separator 5s linear infinite;
     }
-    @keyframes rotate360 {
+    @keyframes separator {
         0% {transform: rotate(0deg);}
         100% {transform: rotate(360deg);}
     }
