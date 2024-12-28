@@ -199,7 +199,7 @@ body {
     animation: scale 1s linear infinite;
 }
 @keyframes scale {
-    50% {transform: scale(102%, 105%);}
+    50% {transform: scale(102%, 105%) skew(0.1deg);} /*skew added for smooth performance in Firefox*/
     100% {transform: scale(1, 1)}
 }
 .introduction .action:hover {
