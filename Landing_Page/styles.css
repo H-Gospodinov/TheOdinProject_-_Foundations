@@ -197,9 +197,14 @@ body {
     transform: rotate(45deg);
 }
 .introduction .about {
+    display: flex;
+    flex-flow: column;
+    row-gap: 20px;
     max-width: 850px;
     margin-top: -5px;
-    line-height: 28px;
+}
+.introduction .about p {
+    line-height: 30px;
     text-align: justify;
     hyphens: auto;
 }
@@ -212,7 +217,7 @@ body {
 }
 .introduction .action {
     position: relative;
-    margin-top: 15px;
+    margin-top: 20px;
     border-radius: 5px;
     background: #0cb;
     padding: 20px;
@@ -296,7 +301,7 @@ body {
     transform: translateX(5px);
 }
 .item-box .description {
-    max-height: 66px; /*3 lines*/
+    max-height: 66px;
     overflow: hidden;
     margin-top: -5px;
 }
@@ -431,6 +436,9 @@ body {
         display: none;
     }
     .introduction h1 .hide {
+        display: none;
+    }
+    .introduction .about p~p {
         display: none;
     }
 }
