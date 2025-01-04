@@ -152,7 +152,11 @@ body {
 
 .page-content {
     flex-grow: 1;
-    padding: 2% 0 5%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    /*padding: 2% 0 5%;*/
+    padding: 2% 0;
 }
 
 .upper-section {
@@ -258,6 +262,8 @@ body {
     max-height: 50px;
 }
 
+/* PRODUCTS SECTION IS CURRENTLY DISABLED */ /*
+
 .lower-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -321,7 +327,7 @@ body {
 .item-box .action:hover {
     outline-color: #2f3947;
     background-color: #2f3947;
-}
+} */
 
 .footer {
     display: flex;
