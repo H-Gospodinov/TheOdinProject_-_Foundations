@@ -155,8 +155,8 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    /*padding: 2% 0 5%;*/
-    padding: 2% 0;
+    overflow: hidden;
+    padding: 2% 0 /*5%*/;
 }
 
 .upper-section {
@@ -448,6 +448,16 @@ body {
         display: none;
     }
 }
+@media (max-width: 1500px) {
+
+    .solar-system {
+        /*overflow: hidden;*/
+    }
+    .solar-system .system {
+        padding-top: 90%;
+        transform: rotate(135deg);
+    }
+}
 @media (min-width: 601px) {
 
     .upper-section {
@@ -528,7 +538,7 @@ body {
         padding: 35px;
     }
     .solar-system .system {
-        transform: rotate(90deg);
+        transform: rotate(60deg);
     }
     .lower-section {
         grid-template-columns: repeat(5, 1fr);
