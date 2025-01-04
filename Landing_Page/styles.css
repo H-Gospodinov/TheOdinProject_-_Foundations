@@ -6,7 +6,7 @@
     padding: 0 0;
     outline: none;
 }
-*:before, *:after {
+*::before, *::after {
     box-sizing: border-box;
 }
 ul {
@@ -191,8 +191,8 @@ body {
     right: 10px;
     bottom: -10px;
     left: 10px;
-    border-top: 7px solid #0cb;
-    border-bottom: 7px solid #0cb;
+    border: solid #0cb;
+    border-width: 7px 0;
     border-radius: 50%;
     transform: rotate(45deg);
 }
@@ -221,7 +221,7 @@ body {
     text-shadow: 1px 1px #ffffff33;
     transition: 0.5s ease;
 }
-.introduction .action:before {
+.introduction .action::before {
     content: "";
     position: absolute;
     top: 0; right: 0;
@@ -240,7 +240,7 @@ body {
     border-color: #ffffff33;
     text-shadow: 1px 1px #ffffff66;
 }
-.introduction .action:hover:before {
+.introduction .action:hover::before {
     animation-play-state: paused;
 }
 .solar-system {
@@ -341,7 +341,7 @@ body {
         width: 24px;
         height: 24px;
     }
-    .logotype .icon:before {
+    .logotype .icon::before {
         width: 16px;
         height: 16px;
         box-shadow: 0 0 0 5px #1f2937;
@@ -446,7 +446,7 @@ body {
 }
 @media (min-width: 801px) {
 
-    .navigation .menu-button {
+    .menu-button {
         display: none;
     }
     .navigation .menu {
@@ -459,9 +459,9 @@ body {
         transition: 0.2s ease;
     }
     .navigation .menu a:hover {
-        text-shadow: 1px 1px #ffffff33, -1px -1px #ffffff33;
+        text-shadow: 0 0 10px #ffffff99;
     }
-    .navigation .menu a:after {
+    .navigation .menu a::after {
         content: "";
         position: absolute;
         left: 50%;
