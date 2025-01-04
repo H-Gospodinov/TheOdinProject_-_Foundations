@@ -52,39 +52,72 @@ body {
     background-color: #1f2937cc;
     padding: 25px;
 }
-.header .logo {
+.logotype {
     display: flex;
     align-items: center;
-    column-gap: 9px;
+    column-gap: 10px;
     transform: translateY(-2px);
     font-family: "Expletus Sans", sans-serif;
     font-size: 30px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: #fff;
 }
-.header .logo img {
-    width: 36px;
-    margin-right: 3px;
-    filter: invert(1);
-    transition: 0.3s ease;
-}
-.header .logo a {
+.logotype a {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
     white-space: nowrap;
+    text-shadow: 0 0 10px #ffffff66;
     transition: 0.3s ease;
 }
-.header .logo a:hover {
-    text-shadow: 1px 1px #ffffff29, -1px -1px #ffffff29,
-                 2px 2px #ffffff29, -2px -2px #ffffff29;
+.logotype a:hover {
+    text-shadow: 0 0 8px #ffffffcc;
 }
-.header .name {
-    display: inline-block;
+.logotype .icon {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    box-shadow: 0 0 0 5px #fff,
+                0 0 0 7px #1f2937;
+    border-radius: 50%;
+    transition: 0.3s ease;
 }
-.header .name:first-letter {
-    color: #0cb;
+.logotype .icon::before,
+.logotype .icon::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    margin: auto;
+    border-radius: 50%;
+    transition: 0.3s ease;
 }
-.header .demo {
-    margin-top: 8px;
+.logotype .icon::before {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 0 8px #1f2937;
+    background-color: #0cb;
+}
+.logotype .icon::after {
+    z-index: -1;
+    width: 15px;
+    height: 80px;
+    border: 5px solid #fff;
+    border-left: none;
+    transform: rotate(45deg);
+}
+.logotype .name::first-letter {
+    font-size: 38px;
+    color: #00ccbb;
+    text-shadow: 0 0 20px #00ccbb88;
+}
+.logotype a:hover >.name::first-letter {
+    text-shadow: 0 0 20px #00ccbbcc;
+}
+.logotype .demo {
+    margin-top: 13px;
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 15px;
     font-weight: normal;
@@ -304,12 +337,20 @@ body {
 
 @media (max-width: 600px) {
 
-    .header .logo img {
-        width: 24px !important;
-        margin-right: 0;
+    .logotype .icon {
+        width: 24px;
+        height: 24px;
     }
-    .header .logo a {
+    .logotype .icon:before {
+        width: 16px;
+        height: 16px;
+        box-shadow: 0 0 0 5px #1f2937;
+    }
+    .logotype .name {
         font-size: 24px;
+    }
+    .logotype .name::first-letter {
+        font-size: 30px;
     }
     .introduction h1 {
         font-size: 35px;
@@ -376,9 +417,6 @@ body {
 }
 @media (max-width: 1024px) {
 
-    .header .logo img {
-        width: 30px;
-    }
     .upper-section {
         flex-flow: column;
         row-gap: 45px;
@@ -389,7 +427,7 @@ body {
 }
 @media (max-width: 1200px) {
 
-    .header .logo .hide {
+    .logotype .hide {
         display: none;
     }
     .introduction h1 .hide {
