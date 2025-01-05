@@ -544,15 +544,12 @@ body {
     .introduction .about p~p {
         display: none;
     }
-}
-@media (max-width: 1500px) {
-
-    .solar-system {
-        /*overflow: hidden;*/
-    }
     .solar-system .system {
         padding-top: 90%;
         transform: rotate(135deg);
+    }
+    .system__orbit--sun {
+        min-height: 11%;
     }
 }
 @media (min-width: 601px) {
@@ -629,7 +626,7 @@ body {
         grid-gap: 25px;
     }*/
 }
-@media (min-width: 1501px) {
+@media (min-width: 1401px) {
 
     .upper-section {
         padding: 35px;
