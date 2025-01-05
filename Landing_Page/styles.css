@@ -352,6 +352,87 @@ body {
     text-decoration: underline;
 }
 
+.modal-box {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    width: 330px;
+    max-width: 95%;
+    height: 114px;
+    /*do NOT use transform for centering,
+    it will break the pseudo overlay,
+    its fixed position will turn absolute*/
+    margin: auto;
+    box-shadow: 0 0 10px #1f2937;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 35px 20px;
+}
+.modal-box.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.modal-box::before {
+    content: "";
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: -1;
+    background-color: #000000cc;
+}
+.modal-box::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: -1;
+    box-shadow: 0 0 10px #1f2937;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.modal-box .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    height: 24px;
+    width: 24px;
+    border: none;
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: #0cb;
+    font-size: 0;
+    cursor: pointer;
+}
+.modal-box .close::before,
+.modal-box .close::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    width: 16px;
+    height: 2px;
+    margin: auto;
+    background-color: #fff;
+    transition: 0.5s ease;
+}
+.modal-box .close::before {
+    transform: rotate(-45deg);
+}
+.modal-box .close::after {
+    transform: rotate(45deg);
+}
+.modal-box .close:hover::before {
+    transform: rotate(135deg);
+}
+.modal-box .close:hover::after {
+    transform: rotate(225deg);
+}
 
 @media (max-width: 600px) {
 
@@ -392,7 +473,7 @@ body {
         row-gap: 6px;
         position: absolute;
         right: -5px;
-        z-index: 1;
+        z-index: 2;
         min-width: 155px;
         margin-top: 25px;
         border-radius: 3px;

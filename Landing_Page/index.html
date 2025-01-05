@@ -17,7 +17,7 @@
     <div class="page-container">
         <header class="header">
             <div class="logotype">
-                <a href="#">
+                <a id="logoLink" href="#">
                     <span class="icon">&nbsp;</span>
                     <span class="name">Astronomy</span>
                     <span class="name">Box</span>
@@ -200,10 +200,27 @@
         <div id='stars2'></div>
         <div id='stars3'></div>
     </div>
+    <div class="modal-box" id="modalBox">
+        <button class="close" id="closeButton">&nbsp</button>
+        <p class="message">This is just a demo page, only the external links to GitHub and LinkedIn are set.</p>
+    </div>
     <script>
+        // toggle modal box
+        const headerLink = document.querySelectorAll('#logoLink, #headerMenu a');
+        const modalBox = document.querySelector('#modalBox');
+        headerLink.forEach( function(thisLink) {
+            thisLink.onclick = (e) => {
+                e.preventDefault();
+                modalBox.classList.add('active');
+            }
+        } );
+        modalBox.querySelector('#closeButton').onclick = () => {
+            modalBox.classList.remove('active');
+        }
+        // toggle mobile menu
         const menuButton = document.querySelector('#menuButton');
         const mobileNav = document.querySelector('#headerMenu').parentElement;
-        menuButton.onclick = function() {
+        menuButton.onclick = () => {
             mobileNav.classList.toggle('active');
         }
     </script>
