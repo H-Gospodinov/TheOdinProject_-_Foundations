@@ -66,7 +66,7 @@ body {
 .logotype a {
     display: flex;
     align-items: center;
-    column-gap: 6px;
+    column-gap: 5px;
     white-space: nowrap;
     text-shadow: 0 0 10px #ffffff66;
     transition: 0.3s ease;
@@ -78,7 +78,7 @@ body {
     position: relative;
     width: 36px;
     height: 36px;
-    margin-right: 10px;
+    margin-right: 12px;
     box-shadow: 0 0 0 5px #fff,
                 0 0 0 7px #1f2937;
     border-radius: 50%;
@@ -107,6 +107,9 @@ body {
     border: 5px solid #fff;
     border-left: none;
     transform: rotate(45deg);
+}
+.logotype .name {
+    transition: 0.3s ease;
 }
 .logotype .name::first-letter {
     font-size: 38px;
@@ -167,16 +170,20 @@ body {
     color: #fff;
 }
 .introduction {
+    align-self: stretch;
     display: flex;
     flex-flow: column;
-    row-gap: 20px;
+    justify-content: space-between;
+    row-gap: 30px;
+    position: relative;
+    z-index: 1;
     max-width: 100%;
 }
 .introduction h1 {
     display: flex;
     align-items: center;
     font-family: "Expletus Sans", sans-serif;
-    font-size: 50px;
+    font-size: 46px;
     white-space: nowrap;
     transition: 0.2s ease;
 }
@@ -208,7 +215,7 @@ body {
     margin-top: -5px;
 }
 .introduction .about p {
-    line-height: 30px;
+    line-height: 32px;
     text-align: justify;
     hyphens: auto;
 }
@@ -364,7 +371,7 @@ body {
         font-size: 30px;
     }
     .introduction h1 {
-        font-size: 35px;
+        font-size: 38px;
     }
     .introduction h1 strong {
         padding: 15px;
@@ -418,13 +425,13 @@ body {
     .active .menu-button span {
         display: none;
     }
-    .item-box .title {
+    /*.item-box .title {
         margin: -5px 0;
         font-size: 16px;
     }
     .item-box .description {
         display: none;
-    }
+    }*/
 }
 @media (max-width: 1024px) {
 
@@ -435,6 +442,9 @@ body {
     .introduction {
         align-items: center;
     }
+    .introduction .about p {
+        line-height: 28px;
+    }
 }
 @media (max-width: 1200px) {
 
@@ -443,6 +453,12 @@ body {
     }
     .introduction h1 .hide {
         display: none;
+    }
+}
+@media (max-width: 1400px) {
+
+    .introduction {
+        row-gap: 20px;
     }
     .introduction .about p~p {
         display: none;
@@ -463,10 +479,10 @@ body {
     .upper-section {
         padding: 25px 35px;
     }
-    .lower-section {
+    /*.lower-section {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 20px;
-    }
+    }*/
 }
 @media (min-width: 801px) {
 
@@ -525,24 +541,33 @@ body {
         align-self: flex-start;
     }
     .solar-system {
-        width: 35%;
+        width: 40%;
     }
-    .lower-section {
+    /*.lower-section {
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 25px;
-    }
+    }*/
 }
 @media (min-width: 1501px) {
 
     .upper-section {
         padding: 35px;
     }
+    .introduction {
+        row-gap: 50px;
+    }
+    .introduction h1 {
+        font-size: 50px;
+    }
+    .solar-system {
+        width: 35%;
+    }
     .solar-system .system {
         transform: rotate(60deg);
     }
-    .lower-section {
+    /*.lower-section {
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 30px;
         padding: 35px;
-    }
+    }*/
 }
