@@ -31,6 +31,7 @@ html, body {
     overflow-x: hidden;
 }
 body {
+    display: flex;
     position: relative;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     font-family: 'Trebuchet MS', sans-serif;
@@ -40,9 +41,7 @@ body {
 .page-container {
     display: flex;
     flex-flow: column;
-    max-width: 2000px;
     min-height: 100%;
-    margin: auto;
 }
 
 .header {
@@ -158,6 +157,8 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: center;
+    max-width: 2000px;
+    margin: auto;
     overflow: hidden;
     padding: 2% 0 /*5%*/;
 }
