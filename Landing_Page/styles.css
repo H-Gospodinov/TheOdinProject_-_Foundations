@@ -358,9 +358,9 @@ body {
     z-index: 99;
     top: 0; right: 0;
     bottom: 0; left: 0;
-    width: 330px;
+    width: 350px;
     max-width: 95%;
-    height: 114px;
+    height: 110px;
     /*do NOT use transform for centering,
     it will break the pseudo overlay,
     its fixed position will turn absolute*/
@@ -368,7 +368,8 @@ body {
     box-shadow: 0 0 10px #1f2937;
     border-radius: 5px;
     background-color: #fff;
-    padding: 35px 20px;
+    padding: 35px 20px 30px;
+    color: #222;
 }
 .modal-box.active {
     display: block;
