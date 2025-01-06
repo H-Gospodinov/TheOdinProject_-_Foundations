@@ -9,3 +9,34 @@
 *::before, *::after {
     box-sizing: border-box;
 }
+img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+html {
+    display: flex;
+    height: 100%; /*fallback*/
+    height: -webkit-fill-available;
+}
+body {
+    width: 100%;
+    background-color: #121922;
+}
+
+.page-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.interface {
+    display: flex;
+    column-gap: 50px;
+}
+.interface img {
+    width: 100px;
+}
