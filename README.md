@@ -1,2 +1,2 @@
-# The_Odin_Project
-Monolithic repository for The Odin Project's "Foundations" and "JavaScript" curriculum.
+# The_Odin_Project_-_Foundations
+Monolithic repository for The Odin Project's "Foundations" curriculum.
