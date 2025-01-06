@@ -32,8 +32,8 @@ html {
     overflow-x: hidden;
 }
 body {
-    position: relative;
     width: 100%;
+    background-color: #121922;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     overflow-x: hidden;
     font-family: 'Trebuchet MS', sans-serif;
@@ -255,7 +255,7 @@ body {
 }
 @keyframes scale {
     50% {transform: scale(102%, 105%) skew(0.1deg);} /*skew added for smooth performance in Firefox*/
-    100% {transform: scale(1, 1)}
+    100% {transform: scale(1, 1);}
 }
 .introduction .action:hover {
     box-shadow: 0 0 30px 0 #0cb;
@@ -384,7 +384,7 @@ body {
     opacity: 1;
     @starting-style {
         opacity: 0;
-    } /*end value goes first*/
+    } /*start value goes last*/
 }
 .modal-box::before {
     content: "";
@@ -495,7 +495,7 @@ body {
         opacity: 1;
         @starting-style {
             opacity: 0;
-        } /*end value goes first*/
+        } /*start value goes last*/
     }
     .navigation .menu-item {
         padding: 3px 12px;
