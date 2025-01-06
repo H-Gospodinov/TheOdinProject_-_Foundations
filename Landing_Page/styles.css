@@ -374,14 +374,15 @@ body {
     background-color: #fff;
     padding: 35px 20px 30px;
     color: #222;
+    transition: 0.5s ease allow-discrete;
+    opacity: 0; /*allow discrete*/
 }
 .modal-box.active {
     display: block;
-    animation: fadeIn 0.5s;
-}
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+    } /*end value goes first*/
 }
 .modal-box::before {
     content: "";
