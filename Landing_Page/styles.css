@@ -31,7 +31,6 @@ html, body {
     overflow-x: hidden;
 }
 body {
-    display: flex;
     position: relative;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     font-family: 'Trebuchet MS', sans-serif;
@@ -41,8 +40,8 @@ body {
 .page-container {
     display: flex;
     flex-flow: column;
-    width: 100%;
-    min-height: 100%;
+    min-height: 100%; /*fallback*/
+    min-height: -webkit-fill-available;
 }
 
 .header {
