@@ -25,14 +25,17 @@ a {
     color: inherit;
 }
 
-html, body {
+html {
+    display: flex;
     height: 100%; /*fallback*/
     height: -webkit-fill-available;
     overflow-x: hidden;
 }
 body {
     position: relative;
+    width: 100%;
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    overflow-x: hidden;
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 15px;
 }
@@ -40,8 +43,7 @@ body {
 .page-container {
     display: flex;
     flex-flow: column;
-    min-height: 100%; /*fallback*/
-    min-height: -webkit-fill-available;
+    min-height: 100%;
 }
 
 .header {
