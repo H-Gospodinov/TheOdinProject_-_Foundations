@@ -56,3 +56,28 @@ body {
 .interface .scissors.selected {
     box-shadow: 0 0 36px #3fdcff;
 }
+
+.modal-box {
+    /*display: none;*/
+    position: fixed;
+    z-index: 99;
+    top: 10%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    max-width: 95%;
+    box-shadow: 0 0 10px #1f2937;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    color: #222;
+    transition: 0.5s ease allow-discrete;
+    /*opacity: 1;*/ /*allow discrete*/
+}
+.modal-box.active {
+    display: block;
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+    } /*start value goes last*/
+}
