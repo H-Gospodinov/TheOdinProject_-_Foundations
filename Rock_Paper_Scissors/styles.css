@@ -39,4 +39,20 @@ body {
 }
 .interface img {
     width: 100px;
+    border-radius: 10px;
+    outline: 10px solid transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.interface .selected {
+    outline: 10px solid #ffffff77;
+}
+.interface .rock.selected {
+    box-shadow: 0 0 36px #ff85ff;
+}
+.interface .paper.selected {
+    box-shadow: 0 0 36px #fcec1a;
+}
+.interface .scissors.selected {
+    box-shadow: 0 0 36px #3fdcff;
 }
