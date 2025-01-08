@@ -1,6 +1,7 @@
 
 const gameButtons = [...document.querySelectorAll('.interface img')];
 const gameTrigger = document.querySelector('#gameTrigger');
+const restartGame = document.querySelector('#restartGame');
 const modalDialog = document.querySelector('.modal-box');
 
 let humanChoice; // not set until click
@@ -53,7 +54,7 @@ function gameWinner() {
 
     switch (true) {
         case humanChoice == computerChoice:
-             alert('draw');
+             declareWinner('Draw!');
              break;
         case humanChoice == 'Rock' && computerChoice == 'Paper':
              defeat = true;
@@ -81,3 +82,12 @@ function gameWinner() {
     victory ? declareWinner('You win!') : null;
     defeat ? declareWinner('You lost!') : null;
 }
+
+restartGame.addEventListener('click', function () {
+
+    gameButtons.forEach(button => {
+        button.classList.remove('disabled','selected');
+    });
+    modalDialog.classList.remove('active');
+    toggleHidden('.outcome', true);
+});
