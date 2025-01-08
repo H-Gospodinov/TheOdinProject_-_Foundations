@@ -76,7 +76,7 @@ body {
     text-align: center;
     color: #222;
     transition: 0.5s ease allow-discrete;
-    opacity: 1; /*allow discrete*/
+    opacity: 0; /*allow discrete*/
 }
 .modal-box.active {
     display: block;

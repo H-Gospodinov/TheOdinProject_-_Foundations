@@ -42,4 +42,42 @@ gameTrigger.addEventListener('click', function () {
     this.hidden = true;
     toggleHidden('#theirChoice', false);
     toggleHidden('.outcome', false);
+
+    gameWinner();
 });
+
+function gameWinner() {
+
+    let victory; // not set until game is triggered
+    let defeat; // not set until game is triggered
+
+    switch (true) {
+        case humanChoice == computerChoice:
+             alert('draw');
+             break;
+        case humanChoice == 'Rock' && computerChoice == 'Paper':
+             defeat = true;
+             break;
+        case humanChoice == 'Rock' && computerChoice == 'Scissors':
+             victory = true;
+             break;
+        case humanChoice == 'Paper' && computerChoice == 'Rock':
+            victory = true;
+             break;
+        case humanChoice == 'Paper' && computerChoice == 'Scissors':
+             defeat = true;
+             break;
+        case humanChoice == 'Scissors' && computerChoice == 'Rock':
+             defeat = true;
+             break;
+        case humanChoice == 'Scissors' && computerChoice == 'Paper':
+             victory = true;
+             break;
+    }
+    function declareWinner(message) {
+        const targetElement = document.querySelector('#winner');
+        targetElement ? targetElement.innerHTML = message : null;
+    }
+    victory ? declareWinner('You win!') : null;
+    defeat ? declareWinner('You lost!') : null;
+}
