@@ -1,32 +1,44 @@
 
 const gameButtons = [...document.querySelectorAll('.interface img')];
 const gameTrigger = document.querySelector('#gameTrigger');
+const modalDialog = document.querySelector('.modal-box');
 
 let humanChoice; // not set until click
 let computerChoice = Math.floor(Math.random() * gameButtons.length);
 
-function displayHumanChoice() {
-    document.querySelector('#yourChoice strong').innerHTML = humanChoice;
-}
-function displayComputerChoice() {
-    document.querySelector('#theirChoice strong').innerHTML = gameButtons[computerChoice].id;
-}
-function toggleHidden(element, state) {
-    document.querySelector(element).hidden = state;
+function displayChoice(selector, choice) {
+    const targetElement = document.querySelector(selector);
+    targetElement ? (targetElement.innerHTML = choice) : null;
 }
 
-gameButtons.forEach(function (thisButton) {
+function toggleHidden(element, state) {
+    const thisElement = document.querySelector(element);
+    thisElement ? (thisElement.hidden = state) : null;
+}
+
+gameButtons.forEach(thisButton => {
     thisButton.addEventListener('click', function () {
-        this.classList.toggle('selected');
+
+        gameButtons.forEach(disable => {
+            disable.classList.add('disabled');
+        });
+        this.classList.add('selected');
+        modalDialog.classList.add('active');
+
         humanChoice = this.id;
-        displayHumanChoice();
+        displayChoice('#yourChoice strong', humanChoice);
+
         toggleHidden('#gameTrigger', false);
         toggleHidden('#theirChoice', true);
     });
 });
 
 gameTrigger.addEventListener('click', function () {
-    displayComputerChoice();
+
+    computerChoice = gameButtons[computerChoice].id;
+    displayChoice('#theirChoice strong', computerChoice);
+
     this.hidden = true;
     toggleHidden('#theirChoice', false);
+    toggleHidden('.outcome', false);
 });
