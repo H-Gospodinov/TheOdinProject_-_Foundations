@@ -5,7 +5,7 @@ const restartGame = document.querySelector('#restartGame');
 const modalDialog = document.querySelector('.modal-box');
 
 let humanChoice; // not set until click
-let computerChoice = Math.floor(Math.random() * gameButtons.length);
+let computerChoice; // not set until click
 
 function displayChoice(selector, choice) {
     const targetElement = document.querySelector(selector);
@@ -37,7 +37,7 @@ gameButtons.forEach(button => {
 
 gameTrigger.addEventListener('click', function () {
 
-    computerChoice = gameButtons[computerChoice].id;
+    computerChoice = gameButtons[Math.floor(Math.random() * gameButtons.length)].id;
     displayChoice('#theirChoice strong', computerChoice);
 
     this.hidden = true;
