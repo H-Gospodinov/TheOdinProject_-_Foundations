@@ -16,11 +16,12 @@ function toggleHidden(element, state) {
     thisElement ? (thisElement.hidden = state) : null;
 }
 
-gameButtons.forEach(thisButton => {
-    thisButton.addEventListener('click', function () {
+gameButtons.forEach(button => {
 
-        gameButtons.forEach(disable => {
-            disable.classList.add('disabled');
+    button.addEventListener('click', function () {
+
+        gameButtons.forEach(button => {
+            button.classList.add('disabled');
         });
         this.classList.add('selected');
         modalDialog.classList.add('active');
