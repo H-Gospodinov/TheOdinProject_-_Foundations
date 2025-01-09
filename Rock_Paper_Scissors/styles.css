@@ -9,11 +9,6 @@
 *::before, *::after {
     box-sizing: border-box;
 }
-img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-}
 
 html {
     display: flex;
@@ -23,9 +18,12 @@ html {
 body {
     width: 100%;
     background-color: #121922;
+    font-family: sans-serif;
+    text-align: center;
+    color: #fff;
 }
 
-.page-container {
+.container {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -33,53 +31,82 @@ body {
     min-height: 100%;
 }
 
+.header h1 {
+    font-size: 35px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+.header h2 {
+    margin-top: 25px;
+    font-weight: normal;
+    font-family: 'Courier New', monospace;
+}
 .interface {
     display: flex;
-    column-gap: 50px;
+    justify-content: center;
+    column-gap: 5%;
+    width: 100%;
+    margin: 4% 0;
+    padding: 4% 10px;
+    transition: 0.3s ease;
 }
 .interface img {
-    width: 100px;
-    border-radius: 10px;
-    outline: 10px solid transparent;
+    width: 140px;
+    max-width: 30%;
+    height: auto;
+    border: 2px dashed #ffffffee;
+    border-radius: 50%;
+    padding: 1px;
     cursor: pointer;
     transition: 0.3s ease;
 }
 .interface .selected {
-    outline: 10px solid #ffffff77;
+    border-color: #000;
 }
 .interface .rock.selected {
     box-shadow: 0 0 36px #ff85ff;
+    background-color: #ff85ff;
 }
 .interface .paper.selected {
     box-shadow: 0 0 36px #fcec1a;
+    background-color: #fcec1a;
 }
 .interface .scissors.selected {
     box-shadow: 0 0 36px #3fdcff;
+    background-color: #3fdcff;
 }
 .interface .disabled {
     pointer-events: none;
     cursor: none;
 }
-
+.score .title {
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+}
 .modal-box {
     display: none;
+    flex-flow: column;
+    row-gap: 20px;
     position: fixed;
     z-index: 99;
-    top: 10%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 700px;
-    max-width: 95%;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    width: 600px;
+    max-width: calc(100% - 20px);
+    margin: auto;
     box-shadow: 0 0 10px #1f2937;
     border-radius: 5px;
     background-color: #fff;
     padding: 40px;
     text-align: center;
+    font-size: 24px;
     color: #222;
     transition: 0.5s ease allow-discrete;
     opacity: 0; /*allow discrete*/
 }
 .modal-box.active {
-    display: block;
+    display: flex;
     opacity: 1;
     @starting-style {
         opacity: 0;
