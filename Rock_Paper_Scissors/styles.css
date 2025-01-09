@@ -83,6 +83,11 @@ body {
     margin-bottom: 10px;
     font-family: 'Courier New', monospace;
 }
+.score .info {
+    display: flex;
+    column-gap: 10px;
+    color: #c00;
+}
 .modal-box {
     display: none;
     flex-flow: column;
@@ -111,4 +116,85 @@ body {
     @starting-style {
         opacity: 0;
     } /*start value goes last*/
+}
+.modal-box::before {
+    content: "";
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: -1;
+    background-color: #000000cc;
+}
+.modal-box::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    z-index: -1;
+    box-shadow: 0 0 10px #1f2937;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.modal-box .action {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    row-gap: 5px;
+}
+.modal-box .choice {
+    display: flex;
+    column-gap: 0.2em; /*restore whitespace*/
+}
+.modal-box .separator {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    background: url(images/lightning.png) center no-repeat;
+    background-size: 27px;
+    vertical-align: middle;
+    font-size: 0;
+}
+.modal-box button {
+    min-width: 200px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ad6;
+    padding: 20px 30px;
+    font-size: 20px;
+    color: #111111;
+    text-shadow: 1px 1px #ffffff55;
+    white-space: nowrap;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.outcome[hidden] {
+    transition: 1s ease allow-discrete;
+    opacity: 0; /*allow discrete*/
+}
+.outcome:not([hidden]) {
+    transition: 1s ease;
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+    } /*start value goes last*/
+}
+.outcome #winner {
+    padding: 15px 0 20px;
+    color: #c00;
+}
+
+@media (min-width: 700px) {
+
+    .interface {
+        column-gap: 35px;
+        padding: 2% 0;
+    }
+    .header h1 {
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 20px 22px;
+        font-size: 40px;
+        color: #222;
+    }
 }

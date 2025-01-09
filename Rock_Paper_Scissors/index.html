@@ -21,9 +21,11 @@
         </div>
         <div class="modal-box">
             <div class="action">
-                <p id="yourChoice">Your choice: <strong>&nbsp;</strong></p>
+                <div class="choice">
+                    <p id="yourChoice"><label>Your choice:</label> <strong>&nbsp;</strong></p>
+                    <p id="theirChoice" hidden><span class="separator">&nbsp;</span> <strong>$nbsp</strong></p>
+                </div>
                 <button id="gameTrigger">Play against your computer!</button>
-                <p id="theirChoice" hidden>Bot's choice: <strong>$nbsp</strong></p>
             </div>
             <div class="outcome" hidden>
                 <p id="winner">No winner yet</p>

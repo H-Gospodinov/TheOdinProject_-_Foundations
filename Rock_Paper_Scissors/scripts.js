@@ -31,6 +31,7 @@ gameButtons.forEach(button => {
         displayChoice('#yourChoice strong', humanChoice);
 
         toggleHidden('#gameTrigger', false);
+        toggleHidden('#yourChoice label', false);
         toggleHidden('#theirChoice', true);
     });
 });
@@ -41,6 +42,7 @@ gameTrigger.addEventListener('click', function () {
     displayChoice('#theirChoice strong', computerChoice);
 
     this.hidden = true;
+    toggleHidden('#yourChoice label', true);
     toggleHidden('#theirChoice', false);
     toggleHidden('.outcome', false);
 
