@@ -13,9 +13,11 @@ function displayChoice(selector, choice) {
     targetElement ? (targetElement.innerHTML = choice) : null;
 }
 
-function toggleHidden(element, state) {
-    const thisElement = document.querySelector(element);
-    thisElement ? (thisElement.hidden = state) : null;
+function toggleHidden(elements, state) {
+    elements.forEach(element => {
+        const thisElement = document.querySelector(element);
+        thisElement ? (thisElement.hidden = state) : null;
+    });
 }
 
 gameButtons.forEach(button => {
@@ -31,9 +33,8 @@ gameButtons.forEach(button => {
         humanChoice = this.id;
         displayChoice('#yourChoice strong', humanChoice);
 
-        toggleHidden('#gameTrigger', false);
-        toggleHidden('#yourChoice label', false);
-        toggleHidden('#theirChoice', true);
+        toggleHidden(['#gameTrigger','#yourChoice label'], false);
+        toggleHidden(['#theirChoice','.outcome'], true);
     });
 });
 
@@ -42,10 +43,8 @@ gameTrigger.addEventListener('click', function () {
     computerChoice = gameButtons[Math.floor(Math.random() * gameButtons.length)].id;
     displayChoice('#theirChoice strong', computerChoice);
 
-    this.hidden = true;
-    toggleHidden('#yourChoice label', true);
-    toggleHidden('#theirChoice', false);
-    toggleHidden('.outcome', false);
+    toggleHidden(['#gameTrigger','#yourChoice label'], true);
+    toggleHidden(['#theirChoice','.outcome'], false);
 
     gameWinner(); // determine winner
 
@@ -105,9 +104,8 @@ function updateScore(selector, score) {
 
 restartGame.addEventListener('click', function () {
 
+    modalDialog.classList.remove('active');
     gameButtons.forEach(button => {
         button.classList.remove('disabled','selected');
     });
-    modalDialog.classList.remove('active');
-    toggleHidden('.outcome', true);
 });
