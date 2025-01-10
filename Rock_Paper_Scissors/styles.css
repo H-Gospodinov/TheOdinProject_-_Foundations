@@ -28,7 +28,10 @@ body {
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    max-width: 1920px;
     min-height: 100%;
+    margin: auto;
+    padding: 0 10px;
 }
 
 .header h1 {
@@ -47,7 +50,7 @@ body {
     column-gap: 5%;
     width: 100%;
     margin: 4% 0;
-    padding: 4% 10px;
+    padding: 6% 0;
     transition: 0.3s ease;
 }
 .interface img {
@@ -204,11 +207,14 @@ body {
     color: #c00;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 721px) {
 
     .interface {
         column-gap: 35px;
-        padding: 2% 0;
+        padding: 40px 0;
+    }
+    .interface .disabled {
+        opacity: 0.5;
     }
     .header h1 {
         border-radius: 10px;
@@ -217,5 +223,13 @@ body {
         font-size: 38px;
         color: #222222;
         text-shadow: 1px 1px #ffffff66;
+    }
+    .modal-box {
+        top: auto; /*render from parent*/
+        margin-top: -400px;
+    }
+    .modal-box::before,
+    .modal-box::after {
+        display: none;
     }
 }

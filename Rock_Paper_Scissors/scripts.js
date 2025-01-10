@@ -23,7 +23,7 @@ gameButtons.forEach(button => {
     button.addEventListener('click', function () {
 
         gameButtons.forEach(button => {
-            button.classList.add('disabled');
+            button.classList.remove('selected');
         });
         this.classList.add('selected');
         modalDialog.classList.add('active');
@@ -47,7 +47,11 @@ gameTrigger.addEventListener('click', function () {
     toggleHidden('#theirChoice', false);
     toggleHidden('.outcome', false);
 
-    gameWinner();
+    gameWinner(); // determine winner
+
+    gameButtons.forEach(button => {
+        button.classList.add('disabled');
+    });
 });
 
 function gameWinner() {
