@@ -18,7 +18,7 @@ html {
 body {
     width: 100%;
     background-color: #121922;
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
     color: #fff;
 }
@@ -79,15 +79,35 @@ body {
     pointer-events: none;
     cursor: none;
 }
-.score .title {
+.result .title {
     margin-bottom: 10px;
     font-family: 'Courier New', monospace;
+    font-weight: normal;
 }
-.score .info {
+.result .score {
     display: flex;
+    align-items: center;
     column-gap: 10px;
     color: #c00;
 }
+.result #yourScore,
+.result #theirScore {
+    min-width: 38px;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #222;
+}
+.result .separator {
+    width: 28px;
+    height: 28px;
+    background: url(images/lightning.png) center no-repeat;
+    background-size: 28px;
+    font-size: 0;
+}
+
 .modal-box {
     display: none;
     flex-flow: column;
@@ -192,9 +212,10 @@ body {
     }
     .header h1 {
         border-radius: 10px;
-        background-color: #fff;
-        padding: 20px 22px;
-        font-size: 40px;
-        color: #222;
+        background-color: #ad6;
+        padding: 22px 28px;
+        font-size: 38px;
+        color: #222222;
+        text-shadow: 1px 1px #ffffff66;
     }
 }

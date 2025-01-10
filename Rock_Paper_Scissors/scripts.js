@@ -6,6 +6,7 @@ const modalDialog = document.querySelector('.modal-box');
 
 let humanChoice; // not set until click
 let computerChoice; // not set until click
+let gameScore = [0, 0]; // yours, theirs
 
 function displayChoice(selector, choice) {
     const targetElement = document.querySelector(selector);
@@ -51,8 +52,8 @@ gameTrigger.addEventListener('click', function () {
 
 function gameWinner() {
 
-    let victory; // not set until game is triggered
-    let defeat; // not set until game is triggered
+    let victory; // not set until click
+    let defeat; // not set until click
 
     switch (true) {
         case humanChoice == computerChoice:
@@ -81,8 +82,21 @@ function gameWinner() {
         const targetElement = document.querySelector('#winner');
         targetElement ? targetElement.innerHTML = message : null;
     }
-    victory ? declareWinner('You win!') : null;
-    defeat ? declareWinner('You lost!') : null;
+    if(victory) {
+        declareWinner('You win!');
+        ++gameScore[0]; // update yours
+        updateScore('#yourScore', gameScore[0]);
+    }
+    if(defeat) {
+        declareWinner('You lost!');
+        ++gameScore[1]; // update theirs
+        updateScore('#theirScore', gameScore[1]);
+    }
+}
+
+function updateScore(selector, score) {
+    const targetElement = document.querySelector(selector);
+    targetElement ? (targetElement.innerHTML = score) : null;
 }
 
 restartGame.addEventListener('click', function () {
