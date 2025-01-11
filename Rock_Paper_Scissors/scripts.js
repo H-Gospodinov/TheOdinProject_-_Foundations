@@ -107,5 +107,6 @@ restartGame.addEventListener('click', function () {
     modalDialog.classList.remove('active');
     gameButtons.forEach(button => {
         button.classList.remove('disabled','selected');
+        button.classList.toggle('retrigger');
     });
 });

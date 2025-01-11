@@ -62,9 +62,19 @@ body {
     padding: 1px;
     cursor: pointer;
     transition: 0.3s ease;
+    animation: blink 0.5s 4;
+}
+@keyframes blink {
+    50% {border-color: #ffffff99;}
+}
+.interface .retrigger {
+    animation: blink-again 0.5s 4;
+}
+@keyframes blink-again {
+    50% {border-color: #ffffff99;}
 }
 .interface .selected {
-    border-color: #000;
+    border-color: #000 !important;
 }
 .interface .rock.selected {
     box-shadow: 0 0 36px #ff85ff;
@@ -182,6 +192,7 @@ body {
     margin-top: 20px;
     border: none;
     border-radius: 5px;
+    outline: 1px solid transparent;
     background-color: #ad6;
     padding: 20px 30px;
     font-size: 20px;
@@ -190,6 +201,11 @@ body {
     white-space: nowrap;
     transition: 0.3s ease;
     cursor: pointer;
+}
+.modal-box button:hover {
+    outline-color: #b3e66f;
+    background-color: #b3e66f;
+    color: #222222;
 }
 .outcome:not([hidden]) {
     transition: 1s ease;
