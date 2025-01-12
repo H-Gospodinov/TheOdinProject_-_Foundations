@@ -72,26 +72,34 @@ body {
     align-items: center;
     font-family: "Expletus Sans", sans-serif;
     font-size: 46px;
+    color: #0cb;
     white-space: nowrap;
     transition: 0.2s ease;
 }
 .introduction .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    margin: 0 10px;
-    border: 3px solid #0cb;
+    width: 80px;
+    height: 80px;
+    margin: 0 12px;
+    box-shadow: -2px -2px 0 2px #111,
+                inset 2px 2px 0 2px #111;
+    border: 6px solid #00ccbbee;
     border-radius: 50%;
-    padding: 15px;
     color: #0cb;
 }
-.introduction .circle::before {
+.introduction .circle::after {
     content: "";
     position: absolute;
-    top: -10px;
-    right: 10px;
-    bottom: -10px;
-    left: 10px;
+    top: -40px;
+    right: 15px;
+    bottom: -40px;
+    left: 15px;
+    z-index: -1;
     border: solid #0cb;
-    border-width: 7px 0;
+    border-width: 15px 0;
     border-radius: 50%;
     transform: rotate(45deg);
 }
@@ -116,7 +124,7 @@ body {
 }
 .introduction .action {
     position: relative;
-    margin-top: 20px;
+    margin: 10px 0 20px;
     border-radius: 5px;
     background: #0cb;
     padding: 20px;
@@ -162,8 +170,13 @@ body {
     .introduction h1 {
         font-size: 38px;
     }
-    .introduction h1 strong {
-        padding: 15px;
+    .introduction .circle {
+        width: 70px;
+        height: 70px;
+        border-width: 5px;
+    }
+    .introduction .hide {
+        display: none;
     }
 }
 @media (max-width: 1024px) {
@@ -179,16 +192,10 @@ body {
         line-height: 28px;
     }
 }
-@media (max-width: 1200px) {
-
-    .introduction h1 .hide {
-        display: none;
-    }
-}
 @media (max-width: 1400px) {
 
     .introduction {
-        row-gap: 20px;
+        row-gap: 30px;
     }
     .introduction .about p~p {
         display: none;
@@ -228,7 +235,11 @@ body {
         row-gap: 50px;
     }
     .introduction h1 {
-        font-size: 50px;
+        font-size: 54px;
+    }
+    .introduction .circle {
+        width: 90px;
+        height: 90px;
     }
     .solar-system {
         width: 35%;
