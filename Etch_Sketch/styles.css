@@ -9,3 +9,107 @@
 *::before, *::after {
     box-sizing: border-box;
 }
+
+html {
+    display: flex;
+    height: 100%; /*fallback*/
+    height: -webkit-fill-available;
+    overflow-x: hidden;
+}
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #121922;
+    font-family: sans-serif;
+    text-align: center;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 30px;
+    max-width: 1920px;
+    min-height: 100%;
+    margin: auto;
+    padding: 45px 10px;
+}
+
+.header {
+    display: flex;
+    flex-flow: column;
+    row-gap: 15px;
+}
+.header .title {
+    border-bottom: 1px solid;
+    font-size: 22px;
+    font-weight: normal;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+.header .text {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+.header .action {
+    display: inline-block;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 12px;
+    background-color: #ad6;
+    font-weight: bold;
+    color: #111;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+.header .action:hover {
+    background-color: #b3e66f;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    width: 800px;
+    max-width: 100%;
+    max-height: 800px;
+}
+
+.grid-pane {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.grid-cell {
+    flex: 1 0 6.25%;
+    box-shadow: 0 0 0 1px #121922;
+    background-color: #ffffffcc;
+    transition: 1s ease;
+    cursor: pointer;
+}
+.grid-cell::before {
+    content: "";
+    display: block;
+    padding-top: 50%;
+}
+.grid-cell:hover {
+    background-color: #fff;
+    transition-duration: 0.1s;
+}
+
+
+@media (max-width: 480px) {
+
+    .header .title {
+        border: none;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    .header button {
+        margin: 3px -3px;
+    }
+}
