@@ -23,13 +23,14 @@ body {
     font-family: sans-serif;
     text-align: center;
     color: #fff;
+    touch-action: none;
 }
 
 .container {
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     row-gap: 30px;
     max-width: 1920px;
     min-height: 100%;
@@ -84,6 +85,7 @@ body {
     max-height: 100%;
     border-radius: 12px;
     overflow: hidden;
+    touch-action: auto;
 }
 .grid-cell {
     flex: 1 0 var(--cell-size);
