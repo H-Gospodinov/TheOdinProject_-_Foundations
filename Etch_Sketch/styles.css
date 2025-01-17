@@ -103,6 +103,20 @@ body {
     transition-duration: 0.1s;
 }
 
+.footer {
+    margin-bottom: -10px;
+    font-size: 15px;
+    color: #eee;
+}
+.footer a {
+    margin-left: 1px;
+    text-decoration: none;
+    color: #ad6;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
 
 @media (max-width: 480px) {
 
