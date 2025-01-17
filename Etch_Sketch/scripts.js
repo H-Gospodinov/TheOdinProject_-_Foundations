@@ -27,17 +27,29 @@ function resetGrid(newSize) {
 
 function userInput(input) {
     if (input == null) {
-        return;
+        return; // prompt cancelled
     }
-    else if (!+input || input < 1 || input > 64) {
-        alert('Please enter a number between 1 and 64');
+    else if (!+input || input < 2 || input > 64) {
+        alert('Please enter a number between 2 and 64');
         userInput(prompt(setGridTxt));
     }
     else {
         resetGrid(parseInt(input));
     }
 }
-setGrid.addEventListener('click', function () {
+setGrid.addEventListener('click', () => {
 
     userInput(prompt(setGridTxt));
 });
+
+grid.addEventListener('mouseover', (event) => {
+
+    const randomColor = Math.floor(Math.random()*16777215).toString(16); // HEX
+    event.target.style.setProperty('background-color', '#'+randomColor);
+});
+/* grid.addEventListener('mouseout', (event) => {
+
+    setTimeout(function () {
+        event.target.removeAttribute('style')
+    }, 10000);
+}); */

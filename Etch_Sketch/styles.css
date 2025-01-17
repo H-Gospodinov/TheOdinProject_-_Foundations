@@ -88,16 +88,17 @@ body {
 .grid-cell {
     flex: 1 0 var(--cell-size);
     box-shadow: 0 0 0 1px #121922;
-    background-color: #ffffffcc;
-    transition: 1s ease;
+    background-color: #fffc;
+    transition: 1.5s ease;
     cursor: pointer;
 }
 .grid-cell::before {
     content: "";
     display: block;
-    padding-top: 50%;
+    height: 100%;
+    transition: 1.5s ease;
 }
-.grid-cell:hover {
+.grid-cell:hover::before {
     background-color: #fff;
     transition-duration: 0.1s;
 }
