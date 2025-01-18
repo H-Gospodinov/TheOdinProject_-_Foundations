@@ -23,7 +23,6 @@ body {
     font-family: sans-serif;
     text-align: center;
     color: #fff;
-    touch-action: none;
 }
 
 .container {
@@ -75,6 +74,7 @@ body {
     width: 800px;
     max-width: 100%;
     max-height: 800px;
+    touch-action: none;
 }
 
 .grid-pane {
