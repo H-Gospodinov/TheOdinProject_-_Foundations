@@ -48,9 +48,9 @@ grid.addEventListener('mouseover', (event) => {
     event.target.style.setProperty('background-color', '#'+randomColor());
 });
 
-grid.addEventListener("touchmove", (event) => {
+grid.addEventListener('touchmove', (event) => {
 
-    const touch = event.touches[0]; // get the touch element
+    const touch = event.touches[0]; // get the touch object
     const touchCell = document.elementFromPoint(touch.clientX, touch.clientY); // get the DOM element
 
     if (touchCell && touchCell.className == 'grid-cell') {
