@@ -1,5 +1,5 @@
 
-const gameButtons = [...document.querySelectorAll('.interface img')];
+const gameButtons = document.querySelectorAll('.interface img');
 const gameTrigger = document.querySelector('#gameTrigger');
 const restartGame = document.querySelector('#restartGame');
 const modalDialog = document.querySelector('.modal-box');
@@ -10,7 +10,7 @@ let gameScore = [0, 0]; // yours, theirs
 
 function displayChoice(selector, choice) {
     const targetElement = document.querySelector(selector);
-    targetElement ? (targetElement.innerHTML = choice) : null;
+    targetElement ? (targetElement.innerText = choice) : null;
 }
 
 function toggleHidden(elements, state) {
@@ -83,7 +83,7 @@ function gameWinner() {
     }
     function declareWinner(message) {
         const targetElement = document.querySelector('#winner');
-        targetElement ? targetElement.innerHTML = message : null;
+        targetElement ? targetElement.innerText = message : null;
     }
     if(victory) {
         declareWinner('You win!');
@@ -99,7 +99,7 @@ function gameWinner() {
 
 function updateScore(selector, score) {
     const targetElement = document.querySelector(selector);
-    targetElement ? (targetElement.innerHTML = score) : null;
+    targetElement ? (targetElement.innerText = score) : null;
 }
 
 restartGame.addEventListener('click', function () {
