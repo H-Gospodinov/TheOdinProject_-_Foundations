@@ -45,17 +45,61 @@ body {
 }
 
 .calculator {
+    display: flex;
+    flex-flow: column;
+    row-gap: 10px;
     width: 330px;
-    height: 530px;
+    height: 525px;
     border: 1px solid #fff8;
     border-bottom-color: #fff1;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 0 20px 0px #0002;
-    background: /*main goes last*/
-    repeating-linear-gradient(90deg, hsla(0,0%,100%, 0) 0%, hsla(0,0%,100%, 0) 6%, hsla(0,0%,100%, .1) 7.5%),
-    repeating-linear-gradient(90deg, hsla(0,0%,0%, 0) 0%, hsla(0,0%,0%, 0) 4%, hsla(0,0%,0%, .03) 4.5%),
-    repeating-linear-gradient(90deg, hsla(0,0%,100%, 0) 0%, hsla(0,0%,100%, 0) 1%, hsla(0,0%,100%, .15) 2.2%),
-    linear-gradient(180deg, hsl(0,0%,78%) 0%, hsl(0,0%,70%) 100%);
+    background: linear-gradient(45deg, #bbb, #ccc);
+    padding: 10px;
+}
+.screen {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 120px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: inset 0 0 5px #0004,
+                inset 0 0 20px #0002,
+                -1px 1px 0 #fff4;
+    background-color: #5bf;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #111;
+}
+.keyboard {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 5px;
+}
+.keyboard button {
+    flex: 1 0 0;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: linear-gradient(15deg, #eee, #fff);
+    font-size: 18px;
+    cursor: pointer;
+}
+.keyboard .numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 5px;
+}
+.keyboard .operators {
+    display: flex;
+    flex-flow: column;
+    row-gap: 5px;
+}
+.keyboard .return {
+    flex-grow: 2;
+    max-height: 89px;
 }
 
 .footer {
