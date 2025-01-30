@@ -8,18 +8,18 @@ const auxDisplay = document.querySelector('#aux_display');
 
 let currentInput = '';
 let currentOperation = '';
-let currentOutput = '';
 
 let operands = []; // input collection
-let operationDisabled = false;
-let returnDisabled = false;
+
+let actionDisabled = false;
+
 
 // PROCESS INPUT
 
 numericKeys.forEach(button => {
     button.addEventListener('click', function () {
 
-        (currentOutput && !currentOperation) ? resetCurrentState() : null;
+        (!currentOperation && actionDisabled) ? resetCurrentState() : null;
 
         const getInput = this.innerText;
 
@@ -36,7 +36,9 @@ numericKeys.forEach(button => {
         currentInput += getInput;
         mainDisplay.innerText = currentInput;
 
-        operationDisabled = false; // re-enable operation keys
+        !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
+
+        actionDisabled = false; // return key is ON
     });
 });
 
@@ -45,70 +47,66 @@ numericKeys.forEach(button => {
 operationKeys.forEach(button => {
     button.addEventListener('click', function () {
 
-        (!operationDisabled && !currentOutput) ? operands.push(+currentInput) : null;
-
-        currentInput = ''; // prepare for next input
-
-        currentOperation = this.id;
         const getAction = this.innerText;
 
-        if (currentOutput) {
-            auxDisplay.innerText = currentOutput + " " + getAction;
+        if (operands.length > 1) {
+            displayResult(); // proceed to calculation
+            auxDisplay.innerText = operands[0] + " " + getAction;
         }
         else {
-            mainDisplay.innerText = calculateResult();
-            auxDisplay.innerText = calculateResult() + " " + getAction;
+            if (currentInput && !actionDisabled) {
+                auxDisplay.innerText = currentInput + " " + getAction;
+            }
+            else if (actionDisabled) {
+                auxDisplay.innerText = operands[0] + " " + getAction; // continue after return
+            }
+            else {
+                auxDisplay.innerText = auxDisplay.innerText.slice(0, -1) + " " + getAction; // update operator
+            }
         }
-        currentOutput = ''; // prepare for next operation
-
-        operationDisabled = true; // disable opertion keys
-        returnDisabled = false; // re-enable return key
+        currentOperation = this.id;
+        currentInput = ''; // prepare for next input
+        actionDisabled = false; // return key is ON
     });
 });
 
 // CALCULATE RESULT
 
-function calculateResult() {
-    return operands.reduce((operand1, operand2) => {
+function calculateResult(operand1, operand2, operation) {
 
-        switch(true) {
-            default:
-                return operand1;
+    switch(operation) {
 
-            case currentOperation === 'add':
-                return operand1 + operand2;
+        case 'add':
+            return operand1 + operand2;
 
-            case currentOperation === 'subtract':
-                return operand1 - operand2;
+        case 'subtract':
+            return operand1 - operand2;
 
-            case currentOperation === 'multiply':
-                return operand1 * operand2;
+        case 'multiply':
+            return operand1 * operand2;
 
-            case currentOperation === 'divide':
-                return operand1 / operand2;
-        }
-    });
+        case 'divide':
+            return operand1 / operand2;
+    }
+}
+function displayResult() {
+    // replace previous operands with the calculation result
+    operands = [calculateResult(operands[0], operands[1], currentOperation)];
+    mainDisplay.innerText = operands[0];
 }
 
 // RETURN RESULT
 
 returnButton.addEventListener('click', () => {
 
-    if (!currentOperation) return;
+    if (!currentOperation || actionDisabled) return;
 
-    if (!returnDisabled) {
-        if (currentInput) {
-            auxDisplay.innerText += " " + currentInput + " " + '=' ;
-            operands.push(+currentInput);
-        }
-        else {
-            auxDisplay.innerText = 'output';
-        }
-        currentOutput = calculateResult();
-        mainDisplay.innerText = currentOutput;
+    if (operands.length > 1) {
+        displayResult();
     }
-    returnDisabled = true; // disable return key
-    currentOperation = '';  // prepare for next operation
+    auxDisplay.innerText = "output";
+    currentOperation = ''; // prepare for next operation
+    actionDisabled = true; // return key is OFF
 });
 
 // CLEAR AND RESET
@@ -117,11 +115,9 @@ function resetCurrentState() {
 
     currentInput = '';
     currentOperation = '';
-    currentOutput = '';
     operands.length = 0;
     mainDisplay.innerText = '0';
     auxDisplay.innerText = 'input';
-    operationDisabled = false;
-    returnDisabled = false;
+    actionDisabled = false;
 }
 document.querySelector('#clear').onclick = resetCurrentState;
