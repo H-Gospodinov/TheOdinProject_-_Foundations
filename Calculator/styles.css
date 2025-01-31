@@ -34,6 +34,14 @@ body {
     margin: auto;
     padding: 45px 10px;
 }
+
+.header {
+    color: #ad6;
+}
+.header .title {
+    color: #ad6;
+}
+
 .content {
     flex-grow: 1;
     display: flex;
@@ -90,6 +98,12 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.screen .blink {
+    animation: blink 0.2s 1;
+}
+@keyframes blink {
+    50% {opacity: 0.5;}
+}
 
 .keyboard {
     flex-grow: 1;
@@ -104,7 +118,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 0 1px transparent,
                 inset 0 0 0 1px #aaa;
-    background: linear-gradient(15deg, #eee, #fff);
+    background: linear-gradient(15deg, #ddd, #fff, #fff);
     font-size: 18px;
     transition: 0.2s ease;
     cursor: pointer;
@@ -124,9 +138,20 @@ body {
     flex-flow: column;
     row-gap: 5px;
 }
-.keyboard .return {
+.keyboard .operator {
+    font-size: 21px;
+}
+.keyboard #decimal {
+    padding-bottom: 1px;
+    font-weight: bold;
+}
+.keyboard #minus {
+    font-size: 25px;
+}
+.keyboard #return {
     flex-grow: 2;
     max-height: 89px;
+    font-size: 21px;
 }
 
 .footer {

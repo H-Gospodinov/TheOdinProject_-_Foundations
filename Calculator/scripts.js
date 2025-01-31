@@ -36,7 +36,12 @@ numericKeys.forEach(button => {
         }
         else if (currentInput === '0') currentInput = ''; // prevent numeric concatenation to initial zero
 
-        currentInput += getInput;
+        currentInput += getInput; // concatenate input
+
+        if (mainDisplay.innerText === currentInput) {
+            mainDisplay.classList.remove('blink');
+            setTimeout(() => {mainDisplay.classList.add('blink')}, 0); // blink once
+        }
         mainDisplay.innerText = currentInput;
 
         !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
