@@ -83,21 +83,28 @@ function calculateResult(operand1, operand2, operation) {
 
     !operand1 && operand2 ? (operand1 = 0) : null;
 
+    let calculation; // expect floating point errors
+
     switch(operation) {
 
         case 'add':
-            return operand1 + operand2;
+            calculation = operand1 + operand2;
+            break;
 
         case 'subtract':
-            return operand1 - operand2;
+            calculation = operand1 - operand2;
+            break;
 
         case 'multiply':
-            return operand1 * operand2;
+            calculation = operand1 * operand2;
+            break;
 
         case 'divide':
-            return operand2 !== 0 ? operand1 / operand2 : throwError();
+            operand2 !== 0 ? (calculation = operand1 / operand2) : throwError();
     }
+    return parseFloat(Math.round(calculation + 'e' + 10) + 'e-' + 10); // fix floating point errors
 }
+
 function displayResult() {
     // replace previous operands with the calculation result
     operands = [calculateResult(operands[0], operands[1], currentOperation)];
@@ -114,6 +121,7 @@ returnButton.addEventListener('click', () => {
         displayResult();
     }
     auxDisplay.innerText = "output";
+
     currentOperation = ''; // prepare for next operation
     actionDisabled = true; // return key is OFF
 });

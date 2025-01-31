@@ -81,6 +81,15 @@ body {
     font-weight: normal;
     opacity: 0.5;
 }
+.screen .display {
+    max-width: 100%;
+}
+.screen .aux-display,
+.screen .main-display {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .keyboard {
     flex-grow: 1;
