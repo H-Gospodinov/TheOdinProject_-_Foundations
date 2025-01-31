@@ -6,12 +6,13 @@ const returnButton = document.querySelector('#return');
 const mainDisplay = document.querySelector('#main_display');
 const auxDisplay = document.querySelector('#aux_display');
 
-let currentInput = '';
+let currentInput = '0';
 let currentOperation = '';
 
 let operands = []; // input collection
 
 let actionDisabled = false;
+let isErrorThrown = false;
 
 
 // PROCESS INPUT
@@ -19,14 +20,16 @@ let actionDisabled = false;
 numericKeys.forEach(button => {
     button.addEventListener('click', function () {
 
+        if (isErrorThrown) {
+            resetCurrentState(); isErrorThrown = false;
+        }
         (!currentOperation && actionDisabled) ? resetCurrentState() : null;
 
         const getInput = this.innerText;
 
-        if (this.id === 'zero') {
-            if (!currentInput && !currentOperation) return;
-        } // prevent initial zero input
-
+        if (this.id === 'zero' && currentInput === '0') {
+            return; // prevent multiple zero input
+        }
         if (this.id === 'decimal') {
             if (!currentInput) currentInput = '0'; // decimal point concatenation to initial zero
             if (currentInput.includes('.')) return; // prevent decimal point if it already exists
@@ -47,24 +50,28 @@ numericKeys.forEach(button => {
 operationKeys.forEach(button => {
     button.addEventListener('click', function () {
 
+        if (isErrorThrown) {
+            resetCurrentState(); isErrorThrown = false;
+        }
         const getAction = this.innerText;
 
         if (operands.length > 1) {
             displayResult(); // proceed to calculation
-            auxDisplay.innerText = operands[0] + " " + getAction;
+            auxDisplay.innerText = operands[0] + " " + getAction; // apply result
         }
         else {
             if (currentInput && !actionDisabled) {
-                auxDisplay.innerText = currentInput + " " + getAction;
+                auxDisplay.innerText = currentInput + " " + getAction; // apply input
             }
             else if (actionDisabled) {
-                auxDisplay.innerText = operands[0] + " " + getAction; // continue after return
+                auxDisplay.innerText = operands[0] + " " + getAction; // apply output
             }
             else {
                 auxDisplay.innerText = auxDisplay.innerText.slice(0, -1) + " " + getAction; // update operator
             }
         }
-        currentOperation = this.id;
+        currentOperation = this.id; // assign operation
+
         currentInput = ''; // prepare for next input
         actionDisabled = false; // return key is ON
     });
@@ -73,6 +80,8 @@ operationKeys.forEach(button => {
 // CALCULATE RESULT
 
 function calculateResult(operand1, operand2, operation) {
+
+    !operand1 && operand2 ? (operand1 = 0) : null;
 
     switch(operation) {
 
@@ -86,7 +95,7 @@ function calculateResult(operand1, operand2, operation) {
             return operand1 * operand2;
 
         case 'divide':
-            return operand1 / operand2;
+            return operand2 !== 0 ? operand1 / operand2 : throwError();
     }
 }
 function displayResult() {
@@ -113,7 +122,7 @@ returnButton.addEventListener('click', () => {
 
 function resetCurrentState() {
 
-    currentInput = '';
+    currentInput = '0';
     currentOperation = '';
     operands.length = 0;
     mainDisplay.innerText = '0';
@@ -121,3 +130,12 @@ function resetCurrentState() {
     actionDisabled = false;
 }
 document.querySelector('#clear').onclick = resetCurrentState;
+
+// THROW ERROR
+
+function throwError() {
+    mainDisplay.innerText = 'not allowed';
+    auxDisplay.innerText = 'division by 0';
+    isErrorThrown = true; // set for reset
+    throw new Error('Division by zero is not allowed.');
+}
