@@ -2,17 +2,18 @@
 const numericKeys = document.querySelectorAll('.number');
 const operationKeys = document.querySelectorAll('.operator');
 const returnButton = document.querySelector('#return');
+const resetButton = document.querySelector('#reset');
 
 const mainDisplay = document.querySelector('#main_display');
 const auxDisplay = document.querySelector('#aux_display');
 
 let currentInput = '0';
 let currentOperation = '';
+let currentOutput = false;
 
 let operands = []; // input collection
 
-let actionDisabled = false;
-let isErrorThrown = false;
+let errorThrown = false;
 
 
 // PROCESS INPUT
@@ -20,21 +21,19 @@ let isErrorThrown = false;
 numericKeys.forEach(button => {
     button.addEventListener('click', function () {
 
-        if (isErrorThrown) {
-            resetCurrentState(); isErrorThrown = false;
+        if (errorThrown) {
+            resetCurrentState(); errorThrown = false;
         }
-        (!currentOperation && actionDisabled) ? resetCurrentState() : null;
-
+        else if (currentOutput && !currentOperation) {
+            resetCurrentState(); // start over
+        }
         const getInput = this.innerText;
 
-        if (this.id === 'zero' && currentInput === '0') {
-            return; // prevent multiple zero input
-        }
         if (this.id === 'decimal') {
-            if (!currentInput) currentInput = '0'; // decimal point concatenation to initial zero
             if (currentInput.includes('.')) return; // prevent decimal point if it already exists
+            if (currentInput === '') currentInput = '0'; // decimal concatenation to initial zero
         }
-        else if (currentInput === '0') currentInput = ''; // prevent numeric concatenation to initial zero
+        else if (currentInput === '0') currentInput = ''; // numeric concatenation to initial zero
 
         currentInput += getInput; // concatenate input
 
@@ -46,7 +45,7 @@ numericKeys.forEach(button => {
 
         !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
 
-        actionDisabled = false; // return key is ON
+        currentOutput = false; // prepare for next output
     });
 });
 
@@ -55,8 +54,8 @@ numericKeys.forEach(button => {
 operationKeys.forEach(button => {
     button.addEventListener('click', function () {
 
-        if (isErrorThrown) {
-            resetCurrentState(); isErrorThrown = false;
+        if (errorThrown) {
+            resetCurrentState(); errorThrown = false;
         }
         const getAction = this.innerText;
 
@@ -65,10 +64,10 @@ operationKeys.forEach(button => {
             auxDisplay.innerText = operands[0] + " " + getAction; // apply result
         }
         else {
-            if (currentInput && !actionDisabled) {
+            if (currentInput && !currentOutput) {
                 auxDisplay.innerText = currentInput + " " + getAction; // apply input
             }
-            else if (actionDisabled) {
+            else if (currentOutput) {
                 auxDisplay.innerText = operands[0] + " " + getAction; // apply output
             }
             else {
@@ -78,7 +77,7 @@ operationKeys.forEach(button => {
         currentOperation = this.id; // assign operation
 
         currentInput = ''; // prepare for next input
-        actionDisabled = false; // return key is ON
+        currentOutput = false; // prepare for next output
     });
 });
 
@@ -107,7 +106,7 @@ function calculateResult(operand1, operand2, operation) {
         case 'divide':
             operand2 !== 0 ? (calculation = operand1 / operand2) : throwError();
     }
-    return parseFloat(Math.round(calculation + 'e' + 10) + 'e-' + 10); // fix floating point errors
+    return parseFloat(Math.round(calculation + 'e' + 14) + 'e-' + 14); // fix floating point errors
 }
 
 function displayResult() {
@@ -120,15 +119,20 @@ function displayResult() {
 
 returnButton.addEventListener('click', () => {
 
-    if (!currentOperation || actionDisabled) return;
+    if (currentOutput) return; // prevent multiple returns
 
     if (operands.length > 1) {
-        displayResult();
+        displayResult(); // proceed to calculation
+    }
+    else {
+        currentInput.includes('.') ? currentInput = currentInput.replace(/0+$/, '') : null; // prevent decimal zero ending
+        currentInput.at(-1) === '.' ? currentInput = currentInput.slice(0, -1) : null; // prevent dot ending
+        !currentOperation ? mainDisplay.innerText = currentInput : null;
     }
     auxDisplay.innerText = "output";
 
     currentOperation = ''; // prepare for next operation
-    actionDisabled = true; // return key is OFF
+    currentOutput = true; // prepare for next operation or reset
 });
 
 // CLEAR AND RESET
@@ -137,18 +141,18 @@ function resetCurrentState() {
 
     currentInput = '0';
     currentOperation = '';
+    currentOutput = false;
     operands.length = 0;
     mainDisplay.innerText = '0';
     auxDisplay.innerText = 'input';
-    actionDisabled = false;
 }
-document.querySelector('#clear').onclick = resetCurrentState;
+resetButton.onclick = resetCurrentState;
 
 // THROW ERROR
 
 function throwError() {
     mainDisplay.innerText = 'not allowed';
     auxDisplay.innerText = 'division by 0';
-    isErrorThrown = true; // set for reset
+    errorThrown = true; // prepare for reset
     throw new Error('Division by zero is not allowed.');
 }
