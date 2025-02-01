@@ -1,8 +1,11 @@
 
 const numericKeys = document.querySelectorAll('.number');
-const operationKeys = document.querySelectorAll('.operator');
+const operatorKeys = document.querySelectorAll('.operator');
 const returnButton = document.querySelector('#return');
 const resetButton = document.querySelector('#reset');
+
+const keyboardKeys = /^[0-9.+\-*/]$/;
+const emulatorKeys = [...numericKeys, ...operatorKeys];
 
 const mainDisplay = document.querySelector('#main_display');
 const auxDisplay = document.querySelector('#aux_display');
@@ -12,7 +15,6 @@ let currentOperation = '';
 let currentOutput = false;
 
 let operands = []; // input collection
-
 let errorThrown = false;
 
 
@@ -51,7 +53,7 @@ numericKeys.forEach(button => {
 
 // PERFORM OPERATION
 
-operationKeys.forEach(button => {
+operatorKeys.forEach(button => {
     button.addEventListener('click', function () {
 
         if (errorThrown) {
@@ -156,3 +158,17 @@ function throwError() {
     errorThrown = true; // prepare for reset
     throw new Error('Division by zero is not allowed.');
 }
+
+// KEYBOARD SUPPORT
+
+document.addEventListener('keydown', (event) => {
+
+    if (event.key.match(keyboardKeys)) {
+
+        emulatorKeys.forEach(button => {
+            button.getAttribute('data-key') === event.key ? button.click() : null;
+        });
+    }
+    event.key === 'Enter' || event.key === '=' ? returnButton.click() : null;
+    event.key === 'Delete' ? resetButton.click() : null;
+});
