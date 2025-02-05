@@ -48,6 +48,7 @@ numericKeys.forEach(button => {
         !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
 
         currentOutput = false; // prepare for next output
+        this.blur(); // remove focus
     });
 });
 
@@ -80,6 +81,7 @@ operatorKeys.forEach(button => {
 
         currentInput = ''; // prepare for next input
         currentOutput = false; // prepare for next output
+        this.blur(); // remove focus
     });
 });
 
@@ -147,6 +149,7 @@ function resetCurrentState() {
     operands.length = 0;
     mainDisplay.innerText = '0';
     auxDisplay.innerText = 'input';
+    resetButton.blur();
 }
 resetButton.onclick = resetCurrentState;
 
