@@ -43,18 +43,19 @@ body {
     row-gap: 15px;
 }
 .header .title {
-    border-bottom: 1px solid;
     font-size: 22px;
     font-weight: normal;
     font-family: 'Courier New', monospace;
     letter-spacing: 1px;
 }
-.header .text {
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
 .header .action {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    margin: 3px 0 -3px;
+}
+.header button {
+    min-width: 110px;
     border: none;
     border-radius: 3px;
     padding: 8px 12px;
@@ -64,7 +65,7 @@ body {
     transition: 0.2s ease;
     cursor: pointer;
 }
-.header .action:hover {
+.header button:hover {
     background-color: #b3e66f;
 }
 
@@ -120,14 +121,10 @@ body {
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 460px) {
 
     .header .title {
-        border: none;
         font-weight: bold;
         text-decoration: underline;
-    }
-    .header button {
-        margin: 3px -3px;
     }
 }

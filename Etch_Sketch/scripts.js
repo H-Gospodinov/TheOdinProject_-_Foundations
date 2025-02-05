@@ -1,8 +1,9 @@
 
 const grid = document.querySelector('#grid');
-const setGrid = document.querySelector('#setGrid');
+const resizeGrid = document.querySelector('#resetSize');
 const setGridTxt = 'Set the number of either horizontal or vertical cells. \nMaximum allowed is 64.';
 const randomColor = () => Math.floor(Math.random()*16777215).toString(16); // HEX
+const resetColor = document.querySelector('#resetColor');
 
 let gridSize = 16; // default grid size is 16 x 16 cells
 
@@ -19,7 +20,7 @@ function createCells(number, size) {
 }
 createCells(gridSize ** 2, 100 / gridSize);
 
-function resetGrid(newSize) {
+function reCreateCells(newSize) {
 
     grid.replaceChildren(); // remove existing cells
     gridSize = newSize; // set new size
@@ -35,10 +36,10 @@ function userInput(input) {
         userInput(prompt(setGridTxt));
     }
     else {
-        resetGrid(parseInt(input));
+        reCreateCells(parseInt(input));
     }
 }
-setGrid.addEventListener('click', () => {
+resizeGrid.addEventListener('click', () => {
 
     userInput(prompt(setGridTxt));
 });
@@ -56,4 +57,10 @@ grid.addEventListener('touchmove', (event) => {
     if (touchCell && touchCell.className == 'grid-cell') {
         touchCell.style.setProperty('background-color', '#'+randomColor());
     }
+});
+
+resetColor.addEventListener('click', () => {
+    [...grid.children].forEach(element => {
+        element.removeAttribute('style');
+    });
 });
