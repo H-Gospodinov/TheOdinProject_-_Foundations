@@ -15,7 +15,7 @@ let currentInput = '0';
 let currentOperation = '';
 let currentOutput = false;
 
-let operands = []; // input collection
+let operands = [0]; // input collection
 let isPercentage = false;
 let errorThrown = false;
 
@@ -152,7 +152,7 @@ function resetCurrentState() {
     currentInput = '0';
     currentOperation = '';
     currentOutput = false;
-    operands.length = 0;
+    operands = [0]; //
     mainDisplay.innerText = '0';
     auxDisplay.innerText = 'input';
     resetButton.blur();
