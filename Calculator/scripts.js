@@ -1,6 +1,7 @@
 
 const numericKeys = document.querySelectorAll('.number');
 const operatorKeys = document.querySelectorAll('.operator');
+const percentageKey = document.querySelector('#percent');
 const returnButton = document.querySelector('#return');
 const resetButton = document.querySelector('#reset');
 
@@ -15,6 +16,7 @@ let currentOperation = '';
 let currentOutput = false;
 
 let operands = []; // input collection
+let isPercentage = false;
 let errorThrown = false;
 
 
@@ -104,7 +106,7 @@ function calculateResult(operand1, operand2, operation) {
             break;
 
         case 'multiply':
-            calculation = operand1 * operand2;
+            isPercentage ? calculation = (operand1 * operand2) / 100 : calculation = operand1 * operand2;
             break;
 
         case 'divide':
@@ -117,6 +119,10 @@ function displayResult() {
     // replace previous operands with the calculation result
     operands = [calculateResult(operands[0], operands[1], currentOperation)];
     mainDisplay.innerText = operands[0];
+    if (isPercentage) {
+        auxDisplay.innerText = 'output';
+        isPercentage = false;
+    }
 }
 
 // RETURN RESULT
@@ -174,4 +180,16 @@ document.addEventListener('keydown', (event) => {
     }
     event.key === 'Enter' || event.key === '=' ? returnButton.click() : null;
     event.key === 'Delete' ? resetButton.click() : null;
+});
+
+// PERCENTAGES
+
+percentageKey.addEventListener('click', () => {
+
+    if (operands.length > 1 && currentOperation === 'multiply') {
+        isPercentage = true;
+        returnButton.click();
+    } else {
+        resetCurrentState();
+    }
 });
