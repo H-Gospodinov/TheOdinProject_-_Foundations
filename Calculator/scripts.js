@@ -108,7 +108,7 @@ function calculateResult(operand1, operand2, operation) {
         case 'divide':
             operand2 !== 0 ? (calculation = operand1 / operand2) : throwError();
     }
-    return parseFloat(Math.round(calculation + 'e' + 14) + 'e-' + 14); // fix floating point errors
+    return parseFloat(Math.round(calculation + 'e' + 10) + 'e-' + 10); // fix floating point errors
 }
 
 function displayResult() {
