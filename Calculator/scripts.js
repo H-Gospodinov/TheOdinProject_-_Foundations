@@ -226,6 +226,10 @@ document.addEventListener('keydown', (event) => {
         resetButton.click();
         emulateHover(resetButton);
     }
+    else if (event.key === 'Backspace') {
+        editButton.click();
+        emulateHover(editButton);
+    }
 });
 
 // PERCENTAGES
