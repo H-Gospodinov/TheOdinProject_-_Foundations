@@ -72,8 +72,12 @@ numericKeys.forEach(button => {
 
 editButton.addEventListener('click', () => {
 
-    currentOutput ? currentInput = operands[0].toString() : null; // apply result
+    currentOutput ? currentInput = operands[0].toString() : null;
 
+    if (currentOperation) {
+        operands.length === 1 ? currentInput = operands[0].toString() : null;
+        operands.length === 2 ? currentInput = operands[1].toString() : null;
+    }
     if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
         currentInput = currentInput.slice(0, -1);
     }
