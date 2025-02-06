@@ -46,7 +46,7 @@ numericKeys.forEach(button => {
             if (!currentInput && currentOutput) {
                 operands[0] = -operands[0]; // invert output
                 mainDisplay.innerText = operands[0];
-                return;
+                return; // preserve output
             }
             else if (!currentInput && currentOperation) {
                 currentInput = (operands[0] * -1).toString(); // invert current
@@ -77,10 +77,9 @@ editButton.addEventListener('click', () => {
     if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
         currentInput = currentInput.slice(0, -1);
     }
-    else currentInput = '0';
+    else currentInput = '0'; // last one
 
     mainDisplay.innerText = currentInput;
-
     !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
 });
 
@@ -208,6 +207,7 @@ document.addEventListener('keydown', (event) => {
             button.getAttribute('data-key') === event.key ? button.click() : null;
         });
     }
+    event.key === '%' && event.shiftKey ? percentageKey.click() : null;
     event.key === 'Enter' || event.key === '=' ? returnButton.click() : null;
     event.key === 'Delete' ? resetButton.click() : null;
 });
@@ -221,6 +221,6 @@ percentageKey.addEventListener('click', () => {
         returnButton.click();
     } else {
         resetCurrentState();
-        alert('Percentage is calculated like this: \n x * y %');
+        alert('Calculate percentages like this: \n x * y %');
     }
 });
