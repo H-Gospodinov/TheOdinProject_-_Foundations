@@ -124,7 +124,7 @@ function calculateResult(operand1, operand2, operation) {
 
     let calculation; // expect floating point errors
 
-    switch(operation) {
+    switch (operation) {
 
         case 'add':
             calculation = operand1 + operand2;
@@ -191,11 +191,25 @@ resetButton.onclick = resetCurrentState;
 // THROW ERROR
 
 function throwError() {
+
     mainDisplay.innerText = 'not allowed';
     auxDisplay.innerText = 'division by 0';
     errorThrown = true; // prepare for reset
     throw new Error('Division by zero is not allowed.');
 }
+
+// PERCENTAGES
+
+percentageKey.addEventListener('click', () => {
+
+    if (operands.length > 1 && currentOperation === 'multiply') {
+        isPercentage = true;
+        returnButton.click();
+    } else {
+        resetCurrentState();
+        alert('Calculate percentages like this: \n x * y %');
+    }
+});
 
 // KEYBOARD SUPPORT
 
@@ -214,33 +228,24 @@ document.addEventListener('keydown', (event) => {
             }
         }); // numeric & operator
     }
-    else if (event.shiftKey && event.key === '%') {
-        percentageKey.click();
-        emulateHover(percentageKey);
-    }
-    else if (event.key === 'Enter' || event.key === '=') {
-        returnButton.click();
-        emulateHover(returnButton);
-    }
-    else if (event.key === 'Delete') {
-        resetButton.click();
-        emulateHover(resetButton);
-    }
-    else if (event.key === 'Backspace') {
-        editButton.click();
-        emulateHover(editButton);
-    }
-});
+    switch (event.key) {
+        case '%':
+            percentageKey.click();
+            emulateHover(percentageKey);
+            break;
 
-// PERCENTAGES
+        case 'Enter': case '=':
+            returnButton.click();
+            emulateHover(returnButton);
+            break;
 
-percentageKey.addEventListener('click', () => {
+        case 'Delete':
+            resetButton.click();
+            emulateHover(resetButton);
+            break;
 
-    if (operands.length > 1 && currentOperation === 'multiply') {
-        isPercentage = true;
-        returnButton.click();
-    } else {
-        resetCurrentState();
-        alert('Calculate percentages like this: \n x * y %');
+        case 'Backspace':
+            editButton.click();
+            emulateHover(editButton);
     }
 });
