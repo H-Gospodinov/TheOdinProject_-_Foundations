@@ -130,13 +130,11 @@ function calculateResult(operand1, operand2, operation) {
 }
 
 function displayResult() {
+
     // replace previous operands with the calculation result
+
     operands = [calculateResult(operands[0], operands[1], currentOperation)];
     mainDisplay.innerText = operands[0];
-    if (isPercentage) {
-        auxDisplay.innerText = 'output';
-        isPercentage = false;
-    }
 }
 
 // RETURN RESULT
@@ -157,7 +155,8 @@ returnButton.addEventListener('click', () => {
 
     currentInput = ''; // prepare for next input
     currentOperation = ''; // prepare for next operation
-    currentOutput = true; // prepare for next operation or reset
+    currentOutput = true; // prepare for next action (any)
+    isPercentage = false; // preprare for next percentage
 });
 
 // CLEAR AND RESET
@@ -206,5 +205,6 @@ percentageKey.addEventListener('click', () => {
         returnButton.click();
     } else {
         resetCurrentState();
+        alert('Percentage is calculated like this: \n x * y %');
     }
 });
