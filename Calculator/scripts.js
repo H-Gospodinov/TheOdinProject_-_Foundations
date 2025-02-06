@@ -201,15 +201,31 @@ function throwError() {
 
 document.addEventListener('keydown', (event) => {
 
+    const emulateHover = (element) => {
+        element.classList.add('hover');
+        setTimeout(() => {element.classList.remove('hover')}, 150);
+    }
     if (event.key.match(keyboardKeys)) {
 
         emulatorKeys.forEach(button => {
-            button.getAttribute('data-key') === event.key ? button.click() : null;
-        });
+            if (button.getAttribute('data-key') === event.key) {
+                button.click();
+                emulateHover(button);
+            }
+        }); // numeric & operator
     }
-    event.key === '%' && event.shiftKey ? percentageKey.click() : null;
-    event.key === 'Enter' || event.key === '=' ? returnButton.click() : null;
-    event.key === 'Delete' ? resetButton.click() : null;
+    else if (event.shiftKey && event.key === '%') {
+        percentageKey.click();
+        emulateHover(percentageKey);
+    }
+    else if (event.key === 'Enter' || event.key === '=') {
+        returnButton.click();
+        emulateHover(returnButton);
+    }
+    else if (event.key === 'Delete') {
+        resetButton.click();
+        emulateHover(resetButton);
+    }
 });
 
 // PERCENTAGES

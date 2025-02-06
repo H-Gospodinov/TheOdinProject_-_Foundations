@@ -125,7 +125,8 @@ body {
     transition: 0.2s ease;
     cursor: pointer;
 }
-.keyboard button:hover {
+.keyboard button:hover,
+.keyboard button.hover {
     box-shadow: 0 0 0 1px #aaa,
                 inset 0 0 0 1px #fff;
 }
