@@ -29,7 +29,7 @@ numericKeys.forEach(button => {
         if (errorThrown) {
             resetCurrentState(); errorThrown = false;
         }
-        else if (currentOutput && !currentOperation) {
+        else if (this.id !== 'inverse' && currentOutput && !currentOperation) {
             resetCurrentState(); // start over
         }
         const getInput = this.innerText;
@@ -41,7 +41,19 @@ numericKeys.forEach(button => {
         }
         else if (currentInput === '0') currentInput = ''; // numeric concatenation to initial zero
 
-        currentInput += getInput; // concatenate input
+        if (this.id === 'inverse') {
+
+            if (!currentInput && currentOutput) {
+                operands[0] = -operands[0]; // invert output
+                mainDisplay.innerText = operands[0];
+                return;
+            }
+            else if (!currentInput && currentOperation) {
+                currentInput = (operands[0] * -1).toString(); // invert current
+            }
+            else currentInput = (+currentInput * -1).toString() // invert input
+        }
+        else currentInput += getInput; // concatenate input
 
         if (mainDisplay.innerText === currentInput) {
             mainDisplay.classList.remove('blink');
@@ -62,7 +74,11 @@ editButton.addEventListener('click', () => {
 
     currentOutput ? currentInput = operands[0].toString() : null; // apply result
 
-    currentInput.length > 1 ? currentInput = currentInput.slice(0, -1) : currentInput = '0';
+    if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
+        currentInput = currentInput.slice(0, -1);
+    }
+    else currentInput = '0';
+
     mainDisplay.innerText = currentInput;
 
     !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
