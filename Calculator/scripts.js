@@ -4,6 +4,7 @@ const operatorKeys = document.querySelectorAll('.operator');
 const percentageKey = document.querySelector('#percent');
 const returnButton = document.querySelector('#return');
 const resetButton = document.querySelector('#reset');
+const editButton = document.querySelector('#edit');
 
 const keyboardKeys = /^[0-9.+\-*/]$/;
 const emulatorKeys = [...numericKeys, ...operatorKeys];
@@ -34,6 +35,7 @@ numericKeys.forEach(button => {
         const getInput = this.innerText;
 
         if (this.id === 'decimal') {
+
             if (currentInput.includes('.')) return; // prevent decimal point if it already exists
             if (currentInput === '') currentInput = '0'; // decimal concatenation to initial zero
         }
@@ -52,6 +54,18 @@ numericKeys.forEach(button => {
         currentOutput = false; // prepare for next output
         this.blur(); // remove focus
     });
+});
+
+// DELETE INPUT
+
+editButton.addEventListener('click', () => {
+
+    currentOutput ? currentInput = operands[0].toString() : null; // apply result
+
+    currentInput.length > 1 ? currentInput = currentInput.slice(0, -1) : currentInput = '0';
+    mainDisplay.innerText = currentInput;
+
+    !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
 });
 
 // PERFORM OPERATION
@@ -141,6 +155,7 @@ returnButton.addEventListener('click', () => {
     }
     auxDisplay.innerText = "output";
 
+    currentInput = ''; // prepare for next input
     currentOperation = ''; // prepare for next operation
     currentOutput = true; // prepare for next operation or reset
 });
