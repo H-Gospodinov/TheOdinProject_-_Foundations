@@ -12,11 +12,16 @@ const emulatorKeys = [...numericKeys, ...operatorKeys];
 const mainDisplay = document.querySelector('#main_display');
 const auxDisplay = document.querySelector('#aux_display');
 
+const updateMainDisplay = (newData) => {
+    mainDisplay.innerText = newData;
+}
+const updateAuxDisplay = (newData) => {
+    auxDisplay.innerText = newData;
+}
 let currentInput = '0';
 let currentOperation = '';
-let currentOutput = false;
+let operands = [0];
 
-let operands = [0]; // input collection
 let isPercentage = false;
 let errorThrown = false;
 
@@ -27,104 +32,53 @@ numericKeys.forEach(button => {
     button.addEventListener('click', function () {
 
         if (errorThrown) {
-            resetCurrentState(); errorThrown = false;
-        }
-        else if (this.id !== 'inverse' && currentOutput && !currentOperation) {
-            resetCurrentState(); // start over
+            resetCurrentState();
         }
         const getInput = this.innerText;
 
-        if (this.id === 'decimal') {
+        if (currentInput.includes('.') && this.id === 'decimal') return;
 
-            if (currentInput.includes('.')) return; // prevent decimal point if it already exists
-            if (currentInput === '') currentInput = '0'; // decimal concatenation to initial zero
+        if (currentInput !== '0' || this.id === 'decimal') {
+            currentInput += getInput;
         }
-        else if (currentInput === '0') currentInput = ''; // numeric concatenation to initial zero
-
-        if (this.id === 'inverse') {
-
-            if (!currentInput && currentOutput) {
-                operands[0] = -operands[0]; // invert output
-                mainDisplay.innerText = operands[0];
-                return; // preserve output
-            }
-            else if (!currentInput && currentOperation) {
-                currentInput = (operands[0] * -1).toString(); // invert current
-            }
-            else currentInput = (+currentInput * -1).toString() // invert input
+        else {
+            currentInput = getInput;
         }
-        else currentInput += getInput; // concatenate input
+        updateMainDisplay(currentInput);
 
-        if (mainDisplay.innerText === currentInput) {
-            mainDisplay.classList.remove('blink');
-            setTimeout(() => {mainDisplay.classList.add('blink')}, 0); // blink once
+        if (!currentOperation) {
+            updateAuxDisplay('input');
+            operands[0] = +currentInput;
         }
-        mainDisplay.innerText = currentInput;
-
-        !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
-
-        currentOutput = false; // prepare for next output
-        this.blur(); // remove focus
+        else {
+            operands[1] = +currentInput;
+        }
     });
 });
 
-// DELETE INPUT
-
-editButton.addEventListener('click', () => {
-
-    currentOutput ? currentInput = operands[0].toString() : null;
-
-    if (currentOperation) {
-        operands.length === 1 ? currentInput = operands[0].toString() : null;
-        operands.length === 2 ? currentInput = operands[1].toString() : null;
-    }
-    if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
-        currentInput = currentInput.slice(0, -1);
-    }
-    else currentInput = '0'; // last one
-
-    mainDisplay.innerText = currentInput;
-    !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
-});
-
-// PERFORM OPERATION
+// ASSIGN OPERATION
 
 operatorKeys.forEach(button => {
     button.addEventListener('click', function () {
 
         if (errorThrown) {
-            resetCurrentState(); errorThrown = false;
+            resetCurrentState();
         }
         const getAction = this.innerText;
 
         if (operands.length > 1) {
-            displayResult(); // proceed to calculation
-            auxDisplay.innerText = operands[0] + " " + getAction; // apply result
+            requestResult(); // prev operation id
         }
-        else {
-            if (currentInput && !currentOutput) {
-                auxDisplay.innerText = currentInput + " " + getAction; // apply input
-            }
-            else if (currentOutput) {
-                auxDisplay.innerText = operands[0] + " " + getAction; // apply output
-            }
-            else {
-                auxDisplay.innerText = auxDisplay.innerText.slice(0, -1) + " " + getAction; // update operator
-            }
-        }
-        currentOperation = this.id; // assign operation
+        currentOperation = this.id; // next operation id
 
-        currentInput = ''; // prepare for next input
-        currentOutput = false; // prepare for next output
-        this.blur(); // remove focus
+        updateAuxDisplay(operands[0] + " " + getAction);
+        currentInput = '0'; // prepare for next
     });
 });
 
 // CALCULATE RESULT
 
 function calculateResult(operand1, operand2, operation) {
-
-    !operand1 && operand2 ? (operand1 = 0) : null;
 
     let calculation; // expect floating point errors
 
@@ -148,34 +102,32 @@ function calculateResult(operand1, operand2, operation) {
     return parseFloat(Math.round(calculation + 'e' + 10) + 'e-' + 10); // fix floating point errors
 }
 
-function displayResult() {
+function requestResult() {
 
     // replace previous operands with the calculation result
 
     operands = [calculateResult(operands[0], operands[1], currentOperation)];
-    mainDisplay.innerText = operands[0];
+    updateMainDisplay(operands[0]);
+    return operands[0];
 }
 
 // RETURN RESULT
 
 returnButton.addEventListener('click', () => {
 
-    if (currentOutput) return; // prevent multiple returns
-
     if (operands.length > 1) {
-        displayResult(); // proceed to calculation
+        requestResult(); // proceed to calculation
     }
     else {
-        currentInput.includes('.') ? currentInput = currentInput.replace(/0+$/, '') : null; // prevent decimal zero ending
-        currentInput.at(-1) === '.' ? currentInput = currentInput.slice(0, -1) : null; // prevent dot ending
-        !currentOperation ? mainDisplay.innerText = currentInput : null;
-    }
-    auxDisplay.innerText = "output";
+        if (currentInput.includes('.')) {
+            currentInput = currentInput.replace(/0+$/, '');
+            currentInput.at(-1) === '.' ? currentInput = currentInput.slice(0, -1) : null;
+        }
+        updateMainDisplay(operands[0]);
+    } updateAuxDisplay('output');
 
-    currentInput = ''; // prepare for next input
-    currentOperation = ''; // prepare for next operation
-    currentOutput = true; // prepare for next action (any)
-    isPercentage = false; // preprare for next percentage
+    currentInput = '0'; // prepare for next
+    currentOperation = ''; // prepare for next
 });
 
 // CLEAR AND RESET
@@ -184,10 +136,10 @@ function resetCurrentState() {
 
     currentInput = '0';
     currentOperation = '';
-    currentOutput = false;
-    operands = [0]; //
+    operands = [0];
     mainDisplay.innerText = '0';
     auxDisplay.innerText = 'input';
+    errorThrown = false;
     resetButton.blur();
 }
 resetButton.onclick = resetCurrentState;
