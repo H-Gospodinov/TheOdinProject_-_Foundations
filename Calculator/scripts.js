@@ -164,8 +164,8 @@ returnButton.addEventListener('click', () => {
     }
     else {
         if (currentInput.includes('.')) {
-            currentInput = currentInput.replace(/0+$/, '');
-            currentInput.at(-1) === '.' ? currentInput = currentInput.slice(0, -1) : null;
+            currentInput = currentInput.replace(/0+$/, ''); // zero ending
+            currentInput = currentInput.replace(/\.$/, ''); // dot ending
         }
         updateMainDisplay(operands[0]);
     } updateAuxDisplay('output');
