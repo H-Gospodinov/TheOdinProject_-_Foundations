@@ -3,8 +3,6 @@ const numericKeys = document.querySelectorAll('.number');
 const operatorKeys = document.querySelectorAll('.operator');
 const actionKeys = document.querySelectorAll('.action');
 
-const percentageKey = document.querySelector('#percent');
-
 const returnButton = document.querySelector('#return');
 const resetButton = document.querySelector('#reset');
 const editButton = document.querySelector('#edit');
@@ -75,7 +73,7 @@ numericKeys.forEach(button => {
 
 editButton.addEventListener('click', () => {
 
-    if (currentInput === '0' && operands.length) {
+    if (currentInput === '0') {
         currentInput = operands[0].toString();
     }
     if ((currentInput.at(0) !== '-' && currentInput.length > 1) ||
@@ -86,6 +84,8 @@ editButton.addEventListener('click', () => {
 
     operands[!currentOperation ? 0 : 1] = +currentInput;
     updateMainDisplay(currentInput);
+
+    editButton.blur(); // remove focus
 });
 
 // ASSIGN OPERATION
@@ -103,6 +103,9 @@ operatorKeys.forEach(button => {
         }
         currentOperation = this.id; // new operation id
 
+        if (this.id === 'percent') {
+            percentageHint();
+        }
         updateAuxDisplay(operands[0] + " " + getAction);
         currentInput = '0';
 
@@ -127,7 +130,11 @@ function calculateResult(operand1, operand2, operation) {
             break;
 
         case 'multiply':
-            isPercentage ? calculation = (operand1 * operand2) / 100 : calculation = operand1 * operand2;
+            calculation = operand1 * operand2;
+            break;
+
+        case 'percent':
+            calculation = operand1 * operand2 / 100;
             break;
 
         case 'divide':
@@ -192,23 +199,19 @@ function throwError() {
     throw new Error('Division by zero is not allowed.');
 }
 
-// PERCENTAGES
+// PERCENTAGE HINT
 
-percentageKey.addEventListener('click', () => {
+function percentageHint() {
 
-    if (operands.length > 1 && currentOperation === 'multiply') {
-        isPercentage = true;
-        returnButton.click();
-    }
-    else if (currentInput === '0' && operands[0] === 0) {
-        mainDisplay.classList.remove('blink');
-        setTimeout(() => {mainDisplay.classList.add('blink')}, 0);
-    }
-    else {
-        resetCurrentState();
-        alert('Calculate "what is x% of y" like this: \n x * y %');
-    }
-});
+    const alertKey = 'percentageHint';
+    const lastShown = localStorage.getItem(alertKey);
+    const now = new Date().getTime();
+
+    if (!lastShown || now - lastShown > 43200000) { // 12h
+        alert('Calculate percentages like this: \n x % y =');
+        localStorage.setItem(alertKey, now);
+    } //localStorage.removeItem('percentageHint');
+}
 
 // KEYBOARD SUPPORT
 
