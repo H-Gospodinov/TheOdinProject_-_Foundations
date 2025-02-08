@@ -39,21 +39,49 @@ numericKeys.forEach(button => {
         if (currentInput.includes('.') && this.id === 'decimal') return;
 
         if (currentInput !== '0' || this.id === 'decimal') {
+            // concatenate input
             currentInput += getInput;
         }
         else {
             currentInput = getInput;
         }
-        updateMainDisplay(currentInput);
-
+        if (this.id === 'inverse') {
+            if (!currentInput) {
+                currentInput = (operands[0] * -1).toString();
+            }
+            else currentInput = (+currentInput * -1).toString();
+        }
         if (!currentOperation) {
             updateAuxDisplay('input');
-            operands[0] = +currentInput;
+            operands[0] = +currentInput; // push first
         }
         else {
-            operands[1] = +currentInput;
+            operands[1] = +currentInput; // push second
         }
+        if (mainDisplay.innerText === currentInput) {
+            mainDisplay.classList.remove('blink');
+            setTimeout(() => {mainDisplay.classList.add('blink')}, 0);
+        }
+        updateMainDisplay(currentInput);
+
+        this.blur(); // remove focus
     });
+});
+
+// EREASE INPUT
+
+editButton.addEventListener('click', () => {
+
+    if (currentInput === '0' && operands.length) {
+        currentInput = operands[0].toString();
+    }
+    if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
+        currentInput = currentInput.slice(0, -1);
+    }
+    else currentInput = '0'; // last one
+
+    !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
+    updateMainDisplay(currentInput);
 });
 
 // ASSIGN OPERATION
@@ -62,17 +90,19 @@ operatorKeys.forEach(button => {
     button.addEventListener('click', function () {
 
         if (errorThrown) {
-            resetCurrentState();
+            resetCurrentState(); return;
         }
         const getAction = this.innerText;
 
         if (operands.length > 1) {
             requestResult(); // prev operation id
         }
-        currentOperation = this.id; // next operation id
+        currentOperation = this.id; // new operation id
 
         updateAuxDisplay(operands[0] + " " + getAction);
-        currentInput = '0'; // prepare for next
+        currentInput = '0';
+
+        this.blur(); // remove focus
     });
 });
 
@@ -80,7 +110,7 @@ operatorKeys.forEach(button => {
 
 function calculateResult(operand1, operand2, operation) {
 
-    let calculation; // expect floating point errors
+    let calculation; // prepare for floating point errors
 
     switch (operation) {
 
@@ -115,6 +145,9 @@ function requestResult() {
 
 returnButton.addEventListener('click', () => {
 
+    if (errorThrown) {
+        resetCurrentState(); return;
+    }
     if (operands.length > 1) {
         requestResult(); // proceed to calculation
     }
@@ -126,8 +159,9 @@ returnButton.addEventListener('click', () => {
         updateMainDisplay(operands[0]);
     } updateAuxDisplay('output');
 
-    currentInput = '0'; // prepare for next
-    currentOperation = ''; // prepare for next
+    currentInput = '0';
+    currentOperation = '';
+    isPercentage = false;
 });
 
 // CLEAR AND RESET
@@ -161,9 +195,14 @@ percentageKey.addEventListener('click', () => {
     if (operands.length > 1 && currentOperation === 'multiply') {
         isPercentage = true;
         returnButton.click();
-    } else {
+    }
+    else if (currentInput === '0' && operands[0] === 0) {
+        mainDisplay.classList.remove('blink');
+        setTimeout(() => {mainDisplay.classList.add('blink')}, 0);
+    }
+    else {
         resetCurrentState();
-        alert('Calculate percentages like this: \n x * y %');
+        alert('Calculate "what is x% of y" like this: \n x * y %');
     }
 });
 
