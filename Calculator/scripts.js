@@ -1,13 +1,16 @@
 
 const numericKeys = document.querySelectorAll('.number');
 const operatorKeys = document.querySelectorAll('.operator');
+const actionKeys = document.querySelectorAll('.action');
+
 const percentageKey = document.querySelector('#percent');
+
 const returnButton = document.querySelector('#return');
 const resetButton = document.querySelector('#reset');
 const editButton = document.querySelector('#edit');
 
-const keyboardKeys = /^[0-9.+\-*/]$/;
-const emulatorKeys = [...numericKeys, ...operatorKeys];
+const keyboardKeys = /^[0-9.+\-*/%=]|Backspace|Delete$/;
+const emulation = [...numericKeys, ...operatorKeys, ...actionKeys];
 
 const mainDisplay = document.querySelector('#main_display');
 const auxDisplay = document.querySelector('#aux_display');
@@ -216,31 +219,15 @@ document.addEventListener('keydown', (event) => {
     }
     if (event.key.match(keyboardKeys)) {
 
-        emulatorKeys.forEach(button => {
+        emulation.forEach(button => {
             if (button.getAttribute('data-key') === event.key) {
                 button.click();
                 emulateHover(button);
             }
-        }); // numeric & operator
+        }); // excluding Enter
     }
-    switch (event.key) {
-        case '%':
-            percentageKey.click();
-            emulateHover(percentageKey);
-            break;
-
-        case 'Enter': case '=':
-            returnButton.click();
-            emulateHover(returnButton);
-            break;
-
-        case 'Delete':
-            resetButton.click();
-            emulateHover(resetButton);
-            break;
-
-        case 'Backspace':
-            editButton.click();
-            emulateHover(editButton);
+    else if (event.key === 'Enter') {
+        returnButton.click();
+        emulateHover(returnButton);
     }
 });
