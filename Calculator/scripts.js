@@ -71,19 +71,20 @@ numericKeys.forEach(button => {
     });
 });
 
-// EREASE INPUT
+// ERASE INPUT
 
 editButton.addEventListener('click', () => {
 
     if (currentInput === '0' && operands.length) {
         currentInput = operands[0].toString();
     }
-    if ((currentInput[0] !== '-' && currentInput.length > 1) || (currentInput[0] === '-' && currentInput.length > 2)) {
+    if ((currentInput.at(0) !== '-' && currentInput.length > 1) ||
+        (currentInput.at(0) === '-' && currentInput.length > 2)) {
         currentInput = currentInput.slice(0, -1);
     }
     else currentInput = '0'; // last one
 
-    !currentOperation ? (operands[0] = +currentInput) : (operands[1] = +currentInput);
+    operands[!currentOperation ? 0 : 1] = +currentInput;
     updateMainDisplay(currentInput);
 });
 
