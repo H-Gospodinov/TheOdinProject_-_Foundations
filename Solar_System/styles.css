@@ -88,7 +88,7 @@ body {
     margin: 0 12px;
     box-shadow: -2px -2px 0 2px #111,
                 inset 2px 2px 0 2px #111;
-    border: 6px solid #00ccbbee;
+    border: 6px solid #0cbe;
     border-radius: 50%;
     color: #0cb;
 }
@@ -132,7 +132,7 @@ body {
     padding: 20px;
     font-size: 18px;
     color: #333;
-    text-shadow: 1px 1px #ffffff33;
+    text-shadow: 1px 1px #fff3;
     transition: 0.5s ease;
 }
 .introduction .action::before {
@@ -151,8 +151,8 @@ body {
 }
 .introduction .action:hover {
     box-shadow: 0 0 30px 0 #0cb;
-    border-color: #ffffff33;
-    text-shadow: 1px 1px #ffffff66;
+    border-color: #fff3;
+    text-shadow: 1px 1px #fff6;
 }
 .introduction .action:hover::before {
     animation-play-state: paused;
