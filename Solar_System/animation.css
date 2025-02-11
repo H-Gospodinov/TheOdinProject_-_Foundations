@@ -6,7 +6,6 @@
     position: fixed;
     top: 0; right: 0;
     bottom: 0; left: 0;
-    z-index: -1;
     max-width: 2000px;
     margin: auto;
 }
@@ -177,7 +176,7 @@
 
 @keyframes spin {
     from {
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
     to {
         transform: translate(-50%, -50%) rotate(-360deg);
