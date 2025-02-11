@@ -166,9 +166,6 @@ body {
 .system__orbit--sun {
     max-height: 50px;
 }
-.system__orbit--sun img {
-    min-height: 34px; /*iOS*/
-}
 
 @media (max-width: 600px) {
 
@@ -210,6 +207,8 @@ body {
         transform: rotate(135deg);
     }
     .system__orbit--sun {
+        display: flex; /*iOS*/
+        flex-flow: column; /*iOS*/
         min-height: 11%;
     }
 }
