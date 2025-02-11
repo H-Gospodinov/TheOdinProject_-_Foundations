@@ -166,6 +166,9 @@ body {
 .system__orbit--sun {
     max-height: 50px;
 }
+.system__orbit--sun img {
+    min-height: 34px; /*iOS*/
+}
 
 @media (max-width: 600px) {
 
