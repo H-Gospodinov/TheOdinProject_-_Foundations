@@ -21,8 +21,8 @@ a {
 
 html {
     display: flex;
-    height: 100%; /*fallback*/
-    height: -webkit-fill-available;
+    min-height: 100%; /*fallback*/
+    min-height: -webkit-fill-available;
     overflow-x: hidden;
 }
 body {
